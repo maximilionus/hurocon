@@ -6,10 +6,9 @@ from . import core
 
 
 # Root CLI handler
-@click.group(
-    help='CLI for Huawei LTE routers'
-)
+@click.group()
 def cli():
+    """ CLI for Huawei LTE routers """
     pass
 
 
