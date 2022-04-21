@@ -19,11 +19,12 @@ LOCAL_CONFIG_DEFAULT = {
 
 
 class LocalConfig(Serialix):
-    def __new__(self):
+    def __new__(self, **kwargs):
         return super().__new__(
             self, 'json',
             LOCAL_CONFIG_PATH, LOCAL_CONFIG_DEFAULT,
-            parser_write_kwargs={"indent": 4}
+            parser_write_kwargs={"indent": 4},
+            **kwargs  # ! Check if it even work dude :/
         )
 
 
@@ -37,7 +38,37 @@ class HLC_Connection(Connection):
         )
 
 
+def test_connection() -> str:
+    result = 'ok'
+    try:
+        with HLC_Connection() as router_con:
+            Client(router_con)
+    except Exception as e:
+        result = e
+
+    return result
+
+
 def reboot_router():
     with HLC_Connection() as router_con:
         client = Client(router_con)
         client.device.set_control(ControlModeEnum.REBOOT)
+
+
+def set_auth_details(username: str, password: str):
+    cfg = LocalConfig()
+    cfg['auth']['username'] = username
+    cfg['auth']['password'] = password
+    cfg.commit()
+
+
+def set_connection_details(ip: str):
+    cfg = LocalConfig()
+    cfg['connection_ip'] = ip
+    cfg.commit()
+
+
+def reset_auth_details():
+    cfg = LocalConfig()
+    cfg['auth'] = LOCAL_CONFIG_DEFAULT['auth']
+    cfg.commit()
