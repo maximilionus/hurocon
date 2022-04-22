@@ -1,9 +1,9 @@
 import setuptools
 
-from huawei_lte_cli.meta import version
+from hurocon.meta import version
 
 
-package_name = 'huawei_lte_cli'
+package_name = 'hurocon'
 package_version = version
 
 
@@ -28,17 +28,18 @@ setuptools.setup(
     ],
     entry_points={
         'console_scripts': [
-            'hurocon = huawei_lte_cli.cli:cli'
+            'hurocon = hurocon.cli:cli'
         ]
     },
     license='Apache-2.0',
-    url='https://github.com/maximilionus/huawei_lte_cli',
+    url='https://github.com/maximilionus/hurocon',
     project_urls={  # TODO
-        'Documentation': '',
-        'Tracker': 'https://github.com/maximilionus/serialix/huawei_lte_cli'
+        'Documentation': 'https://github.com/maximilionus/hurocon/blob/master/README.md',
+        'Tracker': 'https://github.com/maximilionus/serialix/hurocon'
     },
     classifiers=[  # TODO
-        'Development Status :: 5 - Production/Stable',
+        'Development Status :: 3 - Alpha',
+        'Environment :: Console',
         'Programming Language :: Python :: 3 :: Only',
         'Programming Language :: Python :: 3',
         'Programming Language :: Python :: 3.7',
@@ -46,6 +47,9 @@ setuptools.setup(
         'Programming Language :: Python :: 3.9',
         'Programming Language :: Python :: 3.10',
         'Operating System :: OS Independent',
+        'Intended Audience :: System Administrators',
+        'Intended Audience :: Telecommunications Industry',
+        'Natural Language :: English',
         'License :: OSI Approved :: Apache Software License',
     ]
 )

@@ -7,7 +7,7 @@ from huawei_lte_api.enums.device import ControlModeEnum
 from serialix import Serialix
 
 
-LOCAL_CONFIG_PATH = Path.home() / Path('.config/huawei_lte_cli/config.json')
+LOCAL_CONFIG_PATH = Path.home() / Path('.config/hurocon/config.json')
 LOCAL_CONFIG_DEFAULT = {
     "config_version": 1,
     "connection_ip": "192.168.8.1",
