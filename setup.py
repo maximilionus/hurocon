@@ -28,7 +28,7 @@ setuptools.setup(
     ],
     entry_points={
         'console_scripts': [
-            'huawl = huawei_lte_cli.cli:cli'
+            'hurocon = huawei_lte_cli.cli:cli'
         ]
     },
     license='Apache-2.0',

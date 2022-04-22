@@ -55,6 +55,19 @@ def reboot_router():
         client.device.set_control(ControlModeEnum.REBOOT)
 
 
+def sms_send(number, text: str) -> bool:
+    with HLC_Connection() as router_con:
+        client = Client(router_con)
+
+        if client.sms.send_sms(
+            [number],
+            text
+        ) == 'OK':
+            return True
+        else:
+            return False
+
+
 def set_auth_details(username: str, password: str):
     cfg = LocalConfig()
     cfg['auth']['username'] = username
