@@ -1,4 +1,5 @@
 from pathlib import Path
+from shutil import rmtree
 
 from huawei_lte_api.Client import Client
 from huawei_lte_api.Connection import Connection
@@ -39,6 +40,12 @@ class HLC_Connection(Connection):
 
 
 def test_connection() -> str:
+    """
+    Test connection to router with details from configuration file
+
+    :return: "ok" if successfully connected or the reason of failure
+    :rtype: str
+    """
     result = 'ok'
     try:
         with HLC_Connection() as router_con:
@@ -49,39 +56,50 @@ def test_connection() -> str:
     return result
 
 
-def reboot_router():
+def reboot_router() -> None:
     with HLC_Connection() as router_con:
         client = Client(router_con)
         client.device.set_control(ControlModeEnum.REBOOT)
 
 
-def sms_send(number, text: str) -> bool:
+def sms_send(number, text: str) -> str:
     with HLC_Connection() as router_con:
-        client = Client(router_con)
-
-        if client.sms.send_sms(
+        return Client(router_con).sms.send_sms(
             [number],
             text
-        ) == 'OK':
-            return True
-        else:
-            return False
+        )
 
 
-def set_auth_details(username: str, password: str):
+def set_auth_details(username: str, password: str) -> None:
     cfg = LocalConfig()
     cfg['auth']['username'] = username
     cfg['auth']['password'] = password
     cfg.commit()
 
 
-def set_connection_details(ip: str):
+def set_connection_details(ip: str) -> None:
     cfg = LocalConfig()
     cfg['connection_ip'] = ip
     cfg.commit()
 
 
-def reset_auth_details():
+def reset_auth_details() -> None:
     cfg = LocalConfig()
     cfg['auth'] = LOCAL_CONFIG_DEFAULT['auth']
     cfg.commit()
+
+
+def erase_config() -> bool:
+    """
+    Erase all local configuration files and dirs
+
+    :return: Do the existing file was successfully removed
+    :rtype: bool
+    """
+    result = False
+
+    if LOCAL_CONFIG_PATH.parent.exists():
+        rmtree(LOCAL_CONFIG_PATH.parent)
+        result = True
+
+    return result

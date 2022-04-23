@@ -20,8 +20,8 @@ def device():
     pass
 
 
-@device.command()
-def reboot():
+@device.command('reboot')
+def device_reboot():
     """ Reboot the router without any confirmation prompts """
     try:
         core.reboot_router()
@@ -38,8 +38,8 @@ def auth():
     pass
 
 
-@auth.command()
-def login():
+@auth.command('login')
+def auth_login():
     """ Safely configure all authentification related details for further interactions """
     print('Authentification Configurator\n')
     con_ip = input(
@@ -58,15 +58,15 @@ def login():
     print("\nAuthentification details successfully specified")
 
 
-@auth.command()
-def logout():
+@auth.command('logout')
+def auth_logout():
     """ Remove all authentification details """
     core.reset_auth_details()
     print("All authentification details removed")
 
 
-@auth.command(name='test')
-def test_connection():
+@auth.command('test')
+def auth_test_connection():
     """ Test connection to router with current auth details """
     test_result = core.test_connection()
     if test_result == 'ok':
@@ -82,7 +82,7 @@ def sms():
     pass
 
 
-@sms.command(name='send')
+@sms.command('send')
 @click.option('-n', '--number', default='', help='Number that message will be sent to')
 @click.option('-t', '--text', default='', help='Text of the message to be sent')
 def sms_send(number: str, text: str):
@@ -91,16 +91,50 @@ def sms_send(number: str, text: str):
     if len(text) == 0:
         text = input('Text: ')
 
-    print(number, text)
-    exit()
-
     try:
-        if core.sms_send(number, text) is True:
+        send_status = core.sms_send(number, text)
+        if send_status.lower() == 'ok':
             click.echo('SMS sent successfully to {}'.format(number))
         else:
-            click.echo('SMS was not sent, wrong number or message size')
+            click.echo('SMS was not sent, reason: "{}"'.format(send_status))
     except Exception as e:
         click.echo('Execution failed, reason: "{}"'.format(e))
+
+
+@cli.group()
+def config():
+    """ CLI configuration """
+
+
+@config.command('erase')
+def config_erase():
+    """ Erase local configuration """
+
+    if core.erase_config() is True:
+        click.echo("All local configuration successfully erased")
+    else:
+        click.echo("No local configuration files detected")
+
+
+@config.command('path')
+def config_path():
+    """
+    Path to local configuration file
+
+    Note that this command will show the hardcoded path to config file, so it
+    doesn't mean that this file actually exists at the time the command is
+    called
+    """
+    click.echo(core.LOCAL_CONFIG_PATH)
+
+
+@config.command('exist')
+def config_exist():
+    """ Check does the local configuration file exists """
+    if click.echo(core.LOCAL_CONFIG_PATH.exists()) is True:
+        click.echo("Configuration file do exist")
+    else:
+        click.echo("Configuration file doesn't exist")
 
 
 if __name__ == '__main__':
