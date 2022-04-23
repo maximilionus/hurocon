@@ -106,18 +106,43 @@ def config():
     """ CLI configuration """
 
 
-@config.command('erase')
-def config_erase():
+@config.command('init')
+def config_init():
+    """
+    Initialize local configuration file
+
+    File will only be generated if no configuration file already exists
+    on default path.
+    """
+    cfg = core.LocalConfig(auto_file_creation=False)
+
+    if not cfg.is_file_exist():  # ! Replace this with `.file_exists()` after `serialix` 2.3.0 release
+        if cfg.create_file():
+            click.echo('Configuration file successfully generated at "{}"'
+                       .format(core.LOCAL_CONFIG_PATH)
+                       )
+        else:
+            click.echo('Can not generate configuration file at "{}"'
+                       .format(core.LOCAL_CONFIG_PATH)
+                       )
+    else:
+        click.echo('Configuration file already exists on path: "{}"'
+                   .format(core.LOCAL_CONFIG_PATH)
+                   )
+
+
+@config.command('remove')
+def config_remove():
     """ Erase local configuration """
 
     if core.erase_config() is True:
-        click.echo("All local configuration successfully erased")
+        click.echo("All local configuration files and dirs successfully erased")
     else:
         click.echo("No local configuration files detected")
 
 
 @config.command('path')
-def config_path():
+def config_get_path():
     """
     Path to local configuration file
 
