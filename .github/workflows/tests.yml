@@ -36,17 +36,17 @@ jobs:
       - name: Prepare dist
         run: |
           cd ${{ env.BUILT_PACKAGE_DIR }}
-          python -c "from os import rename; from glob import glob;rename(glob('hurocon*.tar.gz')[0], 'hurocon.tar.gz');rename(glob('hurocon*.whl')[0], 'hurocon.whl')"
-
-      - name: Test Wheel
-        run: |
-          cd ${{ env.BUILT_PACKAGE_DIR }}
-          python -m pip install --upgrade --force-reinstall hurocon.whl
-          hurocon --help
-          pip uninstall hurocon
+          python -c "from os import rename; from glob import glob;rename(glob('hurocon*.tar.gz')[0], 'hurocon.tar.gz')"
 
       - name: Test SDist
         run: |
           cd ${{ env.BUILT_PACKAGE_DIR }}
           python -m pip install --upgrade --force-reinstall hurocon.tar.gz
+          hurocon --help
+          pip uninstall hurocon
+
+      - name: Test Wheel
+        run: |
+          cd ${{ env.BUILT_PACKAGE_DIR }}
+          python -m pip install --upgrade --force-reinstall --find-links . hurocon
           hurocon --help
