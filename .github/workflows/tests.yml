@@ -1,0 +1,53 @@
+name: Package Tests
+
+on:
+  push:
+    paths-ignore:
+      - "LICENSE"
+      - "README.md"
+      - "CHANGELOG.md"
+
+jobs:
+  pkg_install_test:
+    name: Test package Install
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
+        python-version: [3.5, 3.6, 3.7, 3.8, 3.9, "3.10"]
+    env:
+      BUILT_PACKAGE_DIR: "./dist"
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v2
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Install Poetry
+        run: |
+          curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py | python -
+
+      - name: Build Project
+        run: |
+          poetry build
+
+      - name: Prepare dist
+        run: |
+          cd ${{ env.BUILT_PACKAGE_DIR }}
+          python -c "from os import rename; from glob import glob;rename(glob('hurocon*.tar.gz')[0], 'hurocon.tar.gz');rename(glob('hurocon*.whl')[0], 'hurocon.whl')"
+
+      - name: Test Wheel
+        run: |
+          cd ${{ env.BUILT_PACKAGE_DIR }}
+          python -m pip install --upgrade --force-reinstall hurocon.whl
+          hurocon --help
+          pip uninstall hurocon
+
+      - name: Test SDist
+        run: |
+          cd ${{ env.BUILT_PACKAGE_DIR }}
+          python -m pip install --upgrade --force-reinstall hurocon.tar.gz
+          hurocon --help
