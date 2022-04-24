@@ -1,7 +1,0 @@
-# Project dependencies
-huawei-lte-api
-serialix
-click
-
-# Project in dev mode
--e .
