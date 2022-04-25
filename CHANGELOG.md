@@ -1,6 +1,4 @@
 # Hurocon Changelog
 
-## Stable Releases
-
-### 0.1.0 : dev
+## 0.1.0 : 2022.04.25
 Package released

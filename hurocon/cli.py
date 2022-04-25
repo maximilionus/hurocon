@@ -32,7 +32,7 @@ def device_reboot():
 
 
 # Auth control
-@cli.group()  # TODO
+@cli.group()
 def auth():
     """ Router authentification """
     pass
