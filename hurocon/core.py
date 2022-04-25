@@ -25,7 +25,7 @@ class LocalConfig(Serialix):
             self, 'json',
             LOCAL_CONFIG_PATH, LOCAL_CONFIG_DEFAULT,
             parser_write_kwargs={"indent": 4},
-            **kwargs  # ! Check if it even work dude :/
+            **kwargs
         )
 
 
