@@ -43,7 +43,7 @@ jobs:
           cd ${{ env.BUILT_PACKAGE_DIR }}
           python -m pip install --upgrade --force-reinstall hurocon.tar.gz
           hurocon --help
-          pip uninstall hurocon
+          pip uninstall -y hurocon
 
       - name: Test Wheel
         run: |
