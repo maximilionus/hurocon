@@ -10,7 +10,6 @@ from . import core, meta
 @click.version_option(meta.version)
 def cli():
     """ Command line interface for Huawei LTE routers """
-    pass
 
 
 # Device commands
@@ -44,16 +43,19 @@ def auth_login():
     print('Authentification Configurator\n')
     con_ip = input(
         '(leave empty to use "{}")\n'
-        'IP address of router: '
-        .format(core.LOCAL_CONFIG_DEFAULT['connection_ip'])
+        'Full address to router: '
+        .format(core.LOCAL_CONFIG_DEFAULT['connection_address'])
     )
     uname = input('Username: ')
     passwd = getpass('Password: ')
 
-    core.set_auth_details(uname, passwd)
-    core.set_connection_details(con_ip if len(con_ip) > 0 else
-                                core.LOCAL_CONFIG_DEFAULT['connection_ip']
-                                )
+    auth_cfg = core.AuthConfig()
+    auth_cfg.username = uname
+    auth_cfg.password = passwd
+    auth_cfg.connection_address = con_ip if len(con_ip) > 0 else \
+        core.LOCAL_CONFIG_DEFAULT['connection_address']
+
+    auth_cfg.commit()
 
     print("\nAuthentification details successfully specified")
 
@@ -61,7 +63,8 @@ def auth_login():
 @auth.command('logout')
 def auth_logout():
     """ Remove all authentification details """
-    core.reset_auth_details()
+    core.AuthConfig().reset()
+    core.AuthConfig().commit()
     print("All authentification details removed")
 
 
@@ -116,7 +119,7 @@ def config_init():
     """
     cfg = core.LocalConfig(auto_file_creation=False)
 
-    if not cfg.is_file_exist():  # ! Replace this with `.file_exists()` after `serialix` 2.3.0 release
+    if not core.LOCAL_CONFIG_PATH.exists():  # ! Replace this with `.file_exists()` after `serialix` 2.3.0 release
         if cfg.create_file():
             click.echo('Configuration file successfully generated at "{}"'
                        .format(core.LOCAL_CONFIG_PATH)
@@ -135,7 +138,7 @@ def config_init():
 def config_remove():
     """ Erase local configuration """
 
-    if core.erase_config() is True:
+    if core.LocalConfig.erase_config() is True:
         click.echo("All local configuration files and dirs successfully erased")
     else:
         click.echo("No local configuration files detected")
