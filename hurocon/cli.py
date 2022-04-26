@@ -156,7 +156,7 @@ def config_get_path():
 @config.command('exist')
 def config_exist():
     """ Check does the local configuration file exists """
-    if click.echo(core.LOCAL_CONFIG_PATH.exists()) is True:
+    if core.LOCAL_CONFIG_PATH.exists() is True:
         click.echo("Configuration file do exist")
     else:
         click.echo("Configuration file doesn't exist")
