@@ -1,6 +1,6 @@
 # Hurocon Changelog
 
-# 0.2.0 : dev
+# 0.2.0 : 2022.05.03
 ## Added
 - Now any valid `url` address can be used to connect to router, not just `ip`
 
