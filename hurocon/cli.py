@@ -119,7 +119,7 @@ def config_init():
     """
     cfg = core.LocalConfig(auto_file_creation=False)
 
-    if not core.LOCAL_CONFIG_PATH.exists():  # ! Replace this with `.file_exists()` after `serialix` 2.3.0 release
+    if not cfg.file_exists():
         if cfg.create_file():
             click.echo('Configuration file successfully generated at "{}"'
                        .format(core.LOCAL_CONFIG_PATH)

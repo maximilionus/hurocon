@@ -140,7 +140,7 @@ use_chardet_on_py3 = ["chardet (>=3.0.2,<5)"]
 
 [[package]]
 name = "serialix"
-version = "2.3.0"
+version = "2.3.1"
 description = "Powerful and easy to use tool for working with various human-readable data serialization languages (like json, yaml, etc)"
 category = "main"
 optional = false
@@ -277,8 +277,8 @@ requests = [
     {file = "requests-2.27.1.tar.gz", hash = "sha256:68d7c56fd5a8999887728ef304a6d12edc7be74f1cfa47714fc8b414525c9a61"},
 ]
 serialix = [
-    {file = "serialix-2.3.0-py3-none-any.whl", hash = "sha256:1bc440383ddfee7dbc8c47167f6e57d2b3952402eec52068fd7700ee891af481"},
-    {file = "serialix-2.3.0.tar.gz", hash = "sha256:79ee7047706dd651fda94258bee9d2e7e408cbec273f1a27fb7cd14b74f9358f"},
+    {file = "serialix-2.3.1-py3-none-any.whl", hash = "sha256:6a70cb3707c91cc71f28ccb75a6c13aa651a7e7ae4607f13b89a29333189c4f2"},
+    {file = "serialix-2.3.1.tar.gz", hash = "sha256:6ea2cd3551d1d1ddabc589fb0a0cf053c98fc00f408ae0eb80f6a52821ee9f57"},
 ]
 typing-extensions = [
     {file = "typing_extensions-4.2.0-py3-none-any.whl", hash = "sha256:6657594ee297170d19f67d55c05852a874e7eb634f4f753dbd667855e07c1708"},

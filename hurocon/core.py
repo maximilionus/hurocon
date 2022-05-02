@@ -19,7 +19,7 @@ LOCAL_CONFIG_DEFAULT = {
     }
 }
 
-config_update_checked = False
+_config_update_checked = False
 
 
 class LocalConfig(JSON_Format):
@@ -30,29 +30,30 @@ class LocalConfig(JSON_Format):
             **kwargs
         )
 
-        # self.__check_updates() # ! Uncomment after `serialix` 2.3.0 release
+        if self.file_exists():
+            self.__check_updates()
 
     def __check_updates(self):
-        global config_update_checked
+        global _config_update_checked
 
-        if not config_update_checked:
-            local_version = int(self['config_version'])
+        if not _config_update_checked:
+            local_version = self['config_version']
             if local_version < LOCAL_CONFIG_DEFAULT['config_version']:
-                self['config_version'] = LOCAL_CONFIG_DEFAULT['config_version']
-
                 if local_version < 2:
-                    # ! Check this working
                     self['connection_address'] = 'http://{}/'.format(
                         self['connection_ip']
                     )
+
                     del(self['connection_ip'])
+
                     self['auth']['password'] = b64encode(
                         self['auth']['password'].encode()
                     ).decode()
 
+                self['config_version'] = LOCAL_CONFIG_DEFAULT['config_version']
                 self.commit()
 
-            config_update_checked = True
+            _config_update_checked = True
 
     @staticmethod
     def erase_config() -> bool:
