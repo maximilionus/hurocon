@@ -140,18 +140,18 @@ use_chardet_on_py3 = ["chardet (>=3.0.2,<5)"]
 
 [[package]]
 name = "serialix"
-version = "2.2.0"
+version = "2.3.0"
 description = "Powerful and easy to use tool for working with various human-readable data serialization languages (like json, yaml, etc)"
 category = "main"
 optional = false
 python-versions = "~=3.5"
 
 [package.extras]
-full = ["ujson (<=5.1.0)", "ruamel.yaml (<=0.17.21)", "toml (<=0.11.0)"]
-test = ["ujson (<=5.1.0)", "ruamel.yaml (<=0.17.21)", "toml (<=0.11.0)", "pytest (<7)"]
-toml = ["toml (<=0.11.0)"]
-ujson = ["ujson (<=5.1.0)"]
-yaml = ["ruamel.yaml (<=0.17.21)"]
+full = ["ujson (<=6.0.0)", "ruamel.yaml (<=1.0.0)", "toml (<=1.0.0)"]
+test = ["ujson (<=6.0.0)", "ruamel.yaml (<=1.0.0)", "toml (<=1.0.0)", "pytest (<7)"]
+toml = ["toml (<=1.0.0)"]
+ujson = ["ujson (<=6.0.0)"]
+yaml = ["ruamel.yaml (<=1.0.0)"]
 
 [[package]]
 name = "typing-extensions"
@@ -197,7 +197,7 @@ testing = ["pytest (>=6)", "pytest-checkdocs (>=2.4)", "pytest-flake8", "pytest-
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.7"
-content-hash = "95576f8ba5c1e1cc7ad6ca8ef95e9134038407f315c2e33c56baeb3923d50fbf"
+content-hash = "39521ef07a7cc4e965032b0c3b51780f756f225af0502344daf3ea075936e1dc"
 
 [metadata.files]
 certifi = [
@@ -277,8 +277,8 @@ requests = [
     {file = "requests-2.27.1.tar.gz", hash = "sha256:68d7c56fd5a8999887728ef304a6d12edc7be74f1cfa47714fc8b414525c9a61"},
 ]
 serialix = [
-    {file = "serialix-2.2.0-py3-none-any.whl", hash = "sha256:db03b1a126b3c23b374cae62af9d4344ce0b614bb720ef520afab7c29ce521ae"},
-    {file = "serialix-2.2.0.tar.gz", hash = "sha256:e053c496e73ab306461bccd2451a6a8cf2ed962e68e158f8dc1ed0f479059597"},
+    {file = "serialix-2.3.0-py3-none-any.whl", hash = "sha256:1bc440383ddfee7dbc8c47167f6e57d2b3952402eec52068fd7700ee891af481"},
+    {file = "serialix-2.3.0.tar.gz", hash = "sha256:79ee7047706dd651fda94258bee9d2e7e408cbec273f1a27fb7cd14b74f9358f"},
 ]
 typing-extensions = [
     {file = "typing_extensions-4.2.0-py3-none-any.whl", hash = "sha256:6657594ee297170d19f67d55c05852a874e7eb634f4f753dbd667855e07c1708"},

@@ -7,6 +7,7 @@
 ## Changed
 - Authentification password now will be stored more safely
 - Configuration file updated to version `2` - automatic merge supported
+- License changed to [MIT](./LICENSE)
 
 ## Fixed
 - Output for `config exist` command will now be displayed properly
