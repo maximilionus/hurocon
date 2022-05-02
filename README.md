@@ -29,19 +29,21 @@ This tool is OS-independent, which means it should work on any platform where py
 
 
 ## Installation
-Currently this tool can only be installed with `pip` on `python` >= 3.7. You can install it from PyPi:
+Currently this tool can only be installed with `pip` on `python` >= 3.7.
 
-```bash
-pip install hurocon
-```
+- You can install it from PyPi:
 
-Or directly from this Github repo:
+  ```bash
+  pip install hurocon
+  ```
 
-```bash
-pip install git+https://github.com/maximilionus/hurocon.git
-```
+- Or directly from Github repo:
 
-> Built executable mode *([pyinstaller](https://pyinstaller.org/)-based)* is planned but no ETA yet
+  ```bash
+  pip install git+https://github.com/maximilionus/hurocon.git
+  ```
+
+> Built executable binary *([pyinstaller](https://pyinstaller.org/)-based)* is planned but no ETA yet
 
 
 ## Quickstart
@@ -54,12 +56,12 @@ $ hurocon
 $ python -m hurocon
 ```
 
-You can also view a list of all root commands with:
+You can also view a list of all main commands with:
 ```bash
 $ hurocon --help
 ```
 
-Each command in this tool has a special `--help` flag to display detailed information about it
+Each command and subcommand in this tool has a special `--help` flag to display detailed information about it
 
 ### Authentification
 First of all, you need to specify the authorization and connection data so that this tool can access the router in the future. You do it in two ways.
@@ -126,10 +128,6 @@ To build this tool to package *([sdist](https://docs.python.org/3/distutils/sour
 ```bash
 $ poetry build
 Building hurocon ...
-  - Building sdist
-  - Built hurocon-*.tar.gz
-  - Building wheel
-  - Built hurocon-*-py3-none-any.whl
 ```
 
 Prepared for distribution package will be located in `./dist/` directory
