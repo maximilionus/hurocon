@@ -1,15 +1,22 @@
 # Hurocon Changelog
+This project uses [semantic versioning](https://semver.org/)
 
-# 0.2.0 : 2022.05.03
-## Added
+
+## 0.3.0dev
+### Changed
+- Project structure enhanced to be more modular
+
+
+## 0.2.0 : 2022.05.03
+### Added
 - Now any valid `url` address can be used to connect to router, not just `ip`
 
-## Changed
+### Changed
 - Authentification password now will be stored more safely
 - Configuration file updated to version `2` - automatic merge supported
 - License changed to [MIT](./LICENSE)
 
-## Fixed
+### Fixed
 - Output for `config exist` command will now be displayed properly
 
 

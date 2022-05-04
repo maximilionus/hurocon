@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "hurocon"
-version = "0.2.0"
+version = "0.3.0dev"
 description = "Command line interface tool for interacting with Huawei LTE routers"
 authors = ["maximilionus <maximilionuss@gmail.com>"]
 license = "MIT"
@@ -25,7 +25,7 @@ classifiers = [
 ]
 
 [tool.poetry.scripts]
-hurocon = "hurocon.cli:cli"
+hurocon = "hurocon:__main__"
 
 
 [tool.poetry.dependencies]
