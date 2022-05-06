@@ -3,6 +3,9 @@ This project uses [semantic versioning](https://semver.org/)
 
 
 ## 0.3.0dev
+### Added
+- New `device info` command to get device information
+
 ### Changed
 - Project structure enhanced to be more modular
 

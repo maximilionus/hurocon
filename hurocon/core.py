@@ -101,7 +101,7 @@ class AuthConfig():
         self.__password = b64encode(passwd.encode()).decode()
 
 
-class HLC_Connection(Connection):
+class HRC_Connection(Connection):
     def __init__(self):
         auth_cfg = AuthConfig()
         super().__init__(
@@ -120,7 +120,7 @@ def test_connection() -> str:
     """
     result = 'ok'
     try:
-        with HLC_Connection() as router_con:
+        with HRC_Connection() as router_con:
             Client(router_con)
     except Exception as e:
         result = e
@@ -128,14 +128,20 @@ def test_connection() -> str:
     return result
 
 
-def reboot_router() -> None:
-    with HLC_Connection() as router_con:
-        client = Client(router_con)
+def reboot_device() -> None:
+    with HRC_Connection() as conn:
+        client = Client(conn)
         client.device.set_control(ControlModeEnum.REBOOT)
 
 
+def get_device_info() -> dict:
+    with HRC_Connection() as conn:
+        client = Client(conn)
+        return client.device.information()
+
+
 def sms_send(number, text: str) -> str:
-    with HLC_Connection() as router_con:
+    with HRC_Connection() as router_con:
         return Client(router_con).sms.send_sms(
             [number],
             text
