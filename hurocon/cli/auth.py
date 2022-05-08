@@ -1,6 +1,7 @@
 from getpass import getpass
 
 import click
+from huawei_lte_api.Client import Client
 
 from .. import core
 from .root import cli
@@ -46,8 +47,12 @@ def auth_logout():
 @auth.command('test')
 def auth_test_connection():
     """ Test connection to router with current auth details """
-    test_result = core.test_connection()
-    if test_result == 'ok':
-        click.echo('Successful Authentification')
+    try:
+        with core.HRC_Connection() as router_con:
+            Client(router_con)
+    except Exception as e:
+        msg = 'Auth failed, reason: "{}"'.format(e)
     else:
-        click.echo('Auth failed, reason: "{}"'.format(test_result))
+        msg = 'Successful Authentification'
+
+    click.echo(msg)

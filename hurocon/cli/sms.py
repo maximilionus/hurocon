@@ -1,4 +1,5 @@
 import click
+from huawei_lte_api.Client import Client
 
 from .. import core
 from .root import cli
@@ -20,7 +21,12 @@ def sms_send(number: str, text: str):
         text = input('Text: ')
 
     try:
-        send_status = core.sms_send(number, text)
+        with core.HRC_Connection() as router_con:
+            send_status = Client(router_con).sms.send_sms(
+                [number],
+                text
+            )
+
         if send_status.lower() == 'ok':
             click.echo('SMS sent successfully to {}'.format(number))
         else:

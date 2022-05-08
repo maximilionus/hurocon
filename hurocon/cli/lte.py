@@ -35,7 +35,7 @@ def lte_set_connection(mode: bool):
     MODE: True, False | [Y]es, [N]o | 1, 0
     """
     try:
-        with core.HRC_Connection as conn:
+        with core.HRC_Connection() as conn:
             Client(conn).dial_up.set_mobile_dataswitch(int(mode))
     except Exception as e:
         msg = 'Can not switch connection mode, reason: "{}"'.format(e)

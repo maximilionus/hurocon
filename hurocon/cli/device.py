@@ -1,6 +1,8 @@
 from pprint import pformat
 
 import click
+from huawei_lte_api.Client import Client
+from huawei_lte_api.enums.device import ControlModeEnum
 
 from .. import core
 from .root import cli
@@ -16,20 +18,29 @@ def device():
 def device_info():
     """ Get device information """
     try:
-        device_info_str = pformat(core.get_device_info())
+        with core.HRC_Connection() as conn:
+            client = Client(conn)
+            device_info_str = pformat(
+                client.device.information()
+            )
     except Exception as e:
-        device_info_str = 'Can not get device information, reason: "{}"' \
-            .format(e)
+        msg = 'Can not get device information, reason: "{}"' \
+              .format(e)
+    else:
+        msg = device_info_str
 
-    click.echo(device_info_str)
+    click.echo(msg)
 
 
 @device.command('reboot')
 def device_reboot():
     """ Reboot the router without any confirmation prompts """
     try:
-        core.reboot_device()
+        with core.HRC_Connection() as conn:
+            Client(conn).device.set_control(ControlModeEnum.REBOOT)
     except Exception as e:
-        click.echo('Execution failed, reason: "{}"'.format(e))
+        msg = 'Execution failed, reason: "{}"'.format(e)
     else:
-        click.echo('Rebooting the device, router will restart in several moments')
+        msg = 'Rebooting the device, router will restart in several moments'
+
+    click.echo(msg)
