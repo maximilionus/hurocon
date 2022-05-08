@@ -6,6 +6,8 @@ This project uses [semantic versioning](https://semver.org/)
 ### Added
 - New `device info` command to get device information
 - New `lte` group with cellular network controls
+  - Get current connection status with `status` command
+  - Enable or disable connection with `set` command
 
 ### Changed
 - Project structure enhanced to be more modular
