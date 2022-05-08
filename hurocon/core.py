@@ -1,5 +1,6 @@
 from pathlib import Path
 from shutil import rmtree
+from typing import Callable
 from base64 import b64encode, b64decode
 
 from huawei_lte_api.Client import Client
