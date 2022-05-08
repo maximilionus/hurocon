@@ -9,14 +9,14 @@ from .root import cli
 
 @cli.group()
 def auth():
-    """ Router authentification """
+    """ Router authentication """
     pass
 
 
 @auth.command('login')
 def auth_login():
-    """ Safely configure all authentification related details for further interactions """
-    print('Authentification Configurator\n')
+    """ Safely configure all authentication related details for further interactions """
+    print('Authentication Configurator\n')
     con_ip = input(
         '(leave empty to use "{}")\n'
         'Full address to router: '
@@ -33,15 +33,15 @@ def auth_login():
 
     auth_cfg.commit()
 
-    print("\nAuthentification details successfully specified")
+    print("\nAuthentication details successfully specified")
 
 
 @auth.command('logout')
 def auth_logout():
-    """ Remove all authentification details """
+    """ Remove all authentication details """
     core.AuthConfig().reset()
     core.AuthConfig().commit()
-    print("All authentification details removed")
+    print("All authentication details removed")
 
 
 @auth.command('test')
@@ -53,6 +53,6 @@ def auth_test_connection():
     except Exception as e:
         msg = 'Auth failed, reason: "{}"'.format(e)
     else:
-        msg = 'Successful Authentification'
+        msg = 'Successful Authentication'
 
     click.echo(msg)

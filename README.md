@@ -29,8 +29,6 @@ This tool is OS-independent, which means it should work on any platform where py
 
 
 ## Installation
-Currently this tool can only be installed with `pip` on `python` >= 3.7.
-
 - You can install it from PyPi:
 
   ```bash
@@ -43,7 +41,7 @@ Currently this tool can only be installed with `pip` on `python` >= 3.7.
   pip install git+https://github.com/maximilionus/hurocon.git
   ```
 
-> Built executable binary *([pyinstaller](https://pyinstaller.org/)-based)* is planned but no ETA yet
+> Currently can only be installed with `pip` on `python >= 3.7`. Binary bundle *([pyinstaller](https://pyinstaller.org/)-based)* is planned but no ETA yet
 
 
 ## Quickstart
@@ -63,8 +61,8 @@ $ hurocon --help
 
 Each command and subcommand in this tool has a special `--help` flag to display detailed information about it
 
-### Authentification
-First of all, you need to specify the authorization and connection data so that this tool can access the router in the future. You do it in two ways.
+### Authentication
+Foremost, you need to specify the authentication details so that this tool can access the device in the future. You do it in two ways.
 
 - In interactive mode:
   ``` bash
@@ -89,7 +87,7 @@ After auth details successfully specified you can test your connection with rout
 $ hurocon auth test
 
 # Returns
-# Success: Successful Authentification
+# Success: Successful Authentication
 # Failure: Auth failed, reason: "..."
 ```
 
@@ -101,7 +99,7 @@ That's it, you're ready to go. And remember - no matter how deep you go, `--help
 ### Prepare The Environment
 To prepare the development environment for this project, follow these steps:
 
-1. Install `poetry` package manager with ([pip](https://pypi.org/project/poetry/), [standalone](https://python-poetry.org/docs/master/#installing-with-the-official-installer) *(recomended)*)
+1. Install `poetry` package manager with ([pip](https://pypi.org/project/poetry/), [standalone](https://python-poetry.org/docs/master/#installing-with-the-official-installer) *(recommended)*)
 
 2. Run the command below to prepare the virtual environment for this project
    ```bash
@@ -113,7 +111,7 @@ To prepare the development environment for this project, follow these steps:
       ```bash
       $ poetry run hurocon
       ```
-    - Or activate the project shell with
+    - Or activate the project environment with
       ```bash
       $ poetry shell
       Spawning shell within ...
