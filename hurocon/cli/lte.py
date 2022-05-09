@@ -30,9 +30,9 @@ def lte_status():
 @click.argument('mode', required=True, type=bool)
 def lte_set_connection(mode: bool):
     """
-    Enable on disable cellular connection
+    Enable or disable cellular connection
 
-    MODE: True, False | [Y]es, [N]o | 1, 0
+    MODE (bool): True, False | [Y]es, [N]o | 1, 0
     """
     try:
         with core.HRC_Connection() as conn:
