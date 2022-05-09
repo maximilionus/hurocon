@@ -13,7 +13,11 @@ Hurocon *(**hu**awei **ro**uter **con**trol)* - command line interface tool for 
 
 ## Features
 - Device Control
+  - Information
   - Reboot
+- Cellular
+  - Connection Status
+  - Switch Mode
 - SMS Control
   - Send
 
