@@ -29,13 +29,14 @@ hurocon = "hurocon:__main__"
 
 
 [tool.poetry.dependencies]
-python = "^3.7"
+python = ">=3.7, <3.11"
 serialix = "^2.3.1"
 huawei-lte-api = "^1.6.0"
 click = "^8.1.2"
 
 [tool.poetry.dev-dependencies]
 flake8 = "^4.0.1"
+pyinstaller = "^5.0.1"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
