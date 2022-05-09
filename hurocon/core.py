@@ -2,9 +2,7 @@ from pathlib import Path
 from shutil import rmtree
 from base64 import b64encode, b64decode
 
-from huawei_lte_api.Client import Client
 from huawei_lte_api.Connection import Connection
-from huawei_lte_api.enums.device import ControlModeEnum
 
 from serialix import JSON_Format
 
@@ -101,42 +99,11 @@ class AuthConfig():
         self.__password = b64encode(passwd.encode()).decode()
 
 
-class HLC_Connection(Connection):
+class HRC_Connection(Connection):
     def __init__(self):
         auth_cfg = AuthConfig()
         super().__init__(
             url=auth_cfg.connection_address,
             username=auth_cfg.username,
             password=auth_cfg.password
-        )
-
-
-def test_connection() -> str:
-    """
-    Test connection to router with details from configuration file
-
-    :return: "ok" if successfully connected or the reason of failure
-    :rtype: str
-    """
-    result = 'ok'
-    try:
-        with HLC_Connection() as router_con:
-            Client(router_con)
-    except Exception as e:
-        result = e
-
-    return result
-
-
-def reboot_router() -> None:
-    with HLC_Connection() as router_con:
-        client = Client(router_con)
-        client.device.set_control(ControlModeEnum.REBOOT)
-
-
-def sms_send(number, text: str) -> str:
-    with HLC_Connection() as router_con:
-        return Client(router_con).sms.send_sms(
-            [number],
-            text
         )

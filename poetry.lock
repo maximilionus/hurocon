@@ -140,7 +140,7 @@ use_chardet_on_py3 = ["chardet (>=3.0.2,<5)"]
 
 [[package]]
 name = "serialix"
-version = "2.3.1"
+version = "2.3.2"
 description = "Powerful and easy to use tool for working with various human-readable data serialization languages (like json, yaml, etc)"
 category = "main"
 optional = false
@@ -176,11 +176,11 @@ socks = ["PySocks (>=1.5.6,!=1.5.7,<2.0)"]
 
 [[package]]
 name = "xmltodict"
-version = "0.12.0"
+version = "0.13.0"
 description = "Makes working with XML feel like you are working with JSON"
 category = "main"
 optional = false
-python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*"
+python-versions = ">=3.4"
 
 [[package]]
 name = "zipp"
@@ -197,7 +197,7 @@ testing = ["pytest (>=6)", "pytest-checkdocs (>=2.4)", "pytest-flake8", "pytest-
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.7"
-content-hash = "39521ef07a7cc4e965032b0c3b51780f756f225af0502344daf3ea075936e1dc"
+content-hash = "d3e7ec61856c8f4cb9abc396fbecd14390c4e72cf8a69596ecd3be06a76b1233"
 
 [metadata.files]
 certifi = [
@@ -277,8 +277,8 @@ requests = [
     {file = "requests-2.27.1.tar.gz", hash = "sha256:68d7c56fd5a8999887728ef304a6d12edc7be74f1cfa47714fc8b414525c9a61"},
 ]
 serialix = [
-    {file = "serialix-2.3.1-py3-none-any.whl", hash = "sha256:6a70cb3707c91cc71f28ccb75a6c13aa651a7e7ae4607f13b89a29333189c4f2"},
-    {file = "serialix-2.3.1.tar.gz", hash = "sha256:6ea2cd3551d1d1ddabc589fb0a0cf053c98fc00f408ae0eb80f6a52821ee9f57"},
+    {file = "serialix-2.3.2-py3-none-any.whl", hash = "sha256:7bf29f481ab9acff05d157561fb3e77f5b02403c7978a9074ad2e9267bb3ff08"},
+    {file = "serialix-2.3.2.tar.gz", hash = "sha256:552c9a8fa2650ac09e5b3b46f925258bdefac335f3a4247410e8e08c6e64730b"},
 ]
 typing-extensions = [
     {file = "typing_extensions-4.2.0-py3-none-any.whl", hash = "sha256:6657594ee297170d19f67d55c05852a874e7eb634f4f753dbd667855e07c1708"},
@@ -289,8 +289,8 @@ urllib3 = [
     {file = "urllib3-1.26.9.tar.gz", hash = "sha256:aabaf16477806a5e1dd19aa41f8c2b7950dd3c746362d7e3223dbe6de6ac448e"},
 ]
 xmltodict = [
-    {file = "xmltodict-0.12.0-py2.py3-none-any.whl", hash = "sha256:8bbcb45cc982f48b2ca8fe7e7827c5d792f217ecf1792626f808bf41c3b86051"},
-    {file = "xmltodict-0.12.0.tar.gz", hash = "sha256:50d8c638ed7ecb88d90561beedbf720c9b4e851a9fa6c47ebd64e99d166d8a21"},
+    {file = "xmltodict-0.13.0-py2.py3-none-any.whl", hash = "sha256:aa89e8fd76320154a40d19a0df04a4695fb9dc5ba977cbb68ab3e4eb225e7852"},
+    {file = "xmltodict-0.13.0.tar.gz", hash = "sha256:341595a488e3e01a85a9d8911d8912fd922ede5fecc4dce437eb4b6c8d037e56"},
 ]
 zipp = [
     {file = "zipp-3.8.0-py3-none-any.whl", hash = "sha256:c4f6e5bbf48e74f7a38e7cc5b0480ff42b0ae5178957d564d18932525d5cf099"},
