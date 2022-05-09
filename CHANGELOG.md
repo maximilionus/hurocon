@@ -2,7 +2,7 @@
 This project uses [semantic versioning](https://semver.org/)
 
 
-## 0.3.0dev
+## 0.3.0.dev0
 ### Added
 - New `device info` command to get device information
 - New `lte` group with cellular network controls
