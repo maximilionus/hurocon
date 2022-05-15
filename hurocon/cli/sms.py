@@ -33,3 +33,31 @@ def sms_send(number: str, text: str):
             click.echo('SMS was not sent, reason: "{}"'.format(send_status))
     except Exception as e:
         click.echo('Execution failed, reason: "{}"'.format(e))
+
+
+@sms.command('list')
+@click.option(
+    '--page', '-P', 'selected_page',
+    default=1, show_default=True, type=int,
+    help='Select page'
+)
+def sms_list(selected_page: int):
+    try:
+        with core.HRC_Connection() as conn:
+            response = Client(conn).sms.get_sms_list(
+                page=selected_page
+            )
+
+            if response['Count'] == '0':
+                result = 'No messages on this page'
+            else:
+                msg_formed = ()
+                for msg in response['Messages']['Message']:
+
+                result = 'Count: {}' \
+                         '\n\nMessages:' \
+                         .format(response['Count'])
+    except Exception as e:
+        result = 'Can not fetch messages list, reason: "{}"'.format(e)
+
+    click.echo(result)
