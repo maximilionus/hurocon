@@ -35,11 +35,34 @@ def sms_send(number: str, text: str):
         click.echo('Execution failed, reason: "{}"'.format(e))
 
 
+@sms.command('count')
+def sms_count_all():
+    """ Count all sms pages and total number of messages """
+    iter_page = 1
+    msg_count = 0
+
+    while True:
+        with core.HRC_Connection() as conn:
+            sms_dict = Client(conn).sms.get_sms_list(page=iter_page)
+
+            if sms_dict['Messages'] is None:
+                break
+
+            msg_count += int(sms_dict['Count'])
+        iter_page += 1
+
+    click.echo(
+        '• Pages: {}\n'
+        '• Count: {}'
+        .format(iter_page - 1, msg_count),
+    )
+
+
 @sms.command('list')
 @click.option(
-    '--page', '-P', 'selected_page',
+    '--page-depth', '-D', 'page_depth',
     default=1, show_default=True, type=int,
-    help='Select page'
+    help='Depth of pages to be fetched if available'
 )
 def sms_list(selected_page: int):
     try:
@@ -53,6 +76,7 @@ def sms_list(selected_page: int):
             else:
                 msg_formed = ()
                 for msg in response['Messages']['Message']:
+                    pass
 
                 result = 'Count: {}' \
                          '\n\nMessages:' \
