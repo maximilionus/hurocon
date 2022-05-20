@@ -18,12 +18,12 @@ def auth_login():
     """ Safely configure all authentication related details for further interactions """
     print('Authentication Configurator\n')
     con_ip = input(
-        '(leave empty to use "{}")\n'
-        'Full address to router: '
+        '  (leave empty to use "{}")\n'
+        '• Full address to router: '
         .format(core.LOCAL_CONFIG_DEFAULT['connection_address'])
     )
-    uname = input('Username: ')
-    passwd = getpass('Password: ')
+    uname = input('• Username: ')
+    passwd = getpass('• Password: ')
 
     auth_cfg = core.AuthConfig()
     auth_cfg.username = uname
