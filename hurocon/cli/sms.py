@@ -58,7 +58,13 @@ def sms_count_all():
     default=1, show_default=True, type=int,
     help='Depth of pages to be fetched if available'
 )
-def sms_list(page_depth: int):
+@click.option(
+    '--content-trim', '-C', 'content_trim',
+    default=40, show_default=True, type=int,
+    help='Trim the message content to specified number of characters'
+)
+def sms_list(page_depth: int, content_trim: int):
+    """ List all sms messages content and other meta-data """
     try:
         msg_arr = []
         cli_output = ''
@@ -69,14 +75,14 @@ def sms_list(page_depth: int):
                     page=selected_page + 1
                 )
 
-            if response['Count'] == '0':  # TODO: First page check
+            if response['Count'] == '0' and selected_page != 0:
                 break
 
             msg_arr.append('• Page: {}\n'.format(selected_page + 1))
 
             for msg in response['Messages']['Message']:
                 msg_arr[selected_page] += '  • ID: {}\n    From: {}\n    When: {}\n    Content: {}\n'.format(
-                    msg['Index'], msg['Phone'], msg['Date'], msg['Content'][:40] + '...'
+                    msg['Index'], msg['Phone'], msg['Date'], msg['Content'][:content_trim] + '...'
                 )
 
             for page in msg_arr:
