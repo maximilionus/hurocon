@@ -37,25 +37,19 @@ def sms_send(number: str, text: str):
 
 @sms.command('count')
 def sms_count_all():
-    """ Count all sms pages and total number of messages """
-    iter_page = 1
-    msg_count = 0
-
-    while True:
+    """ Get overall information about stored sms messages """
+    try:
         with core.HRC_Connection() as conn:
-            sms_dict = Client(conn).sms.get_sms_list(page=iter_page)
+            sms_count_dict = Client(conn).sms.sms_count()
+    except Exception as e:
+        cli_output = 'Can not get sms information, reason: "{}"'.format(e)
+    else:
+        cli_output = ''
+        for key, value in sms_count_dict.items():
+            cli_output += '• {}: {}\n'.format(key, value)
+        cli_output = cli_output[:-1]
 
-            if sms_dict['Messages'] is None:
-                break
-
-            msg_count += int(sms_dict['Count'])
-        iter_page += 1
-
-    click.echo(
-        '• Pages: {}\n'
-        '• Count: {}'
-        .format(iter_page - 1, msg_count),
-    )
+    click.echo(cli_output)
 
 
 @sms.command('list')
