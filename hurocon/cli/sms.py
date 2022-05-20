@@ -58,24 +58,32 @@ def sms_count_all():
     default=1, show_default=True, type=int,
     help='Depth of pages to be fetched if available'
 )
-def sms_list(selected_page: int):
+def sms_list(page_depth: int):
     try:
-        with core.HRC_Connection() as conn:
-            response = Client(conn).sms.get_sms_list(
-                page=selected_page
-            )
+        msg_arr = []
+        cli_output = ''
 
-            if response['Count'] == '0':
-                result = 'No messages on this page'
-            else:
-                msg_formed = ()
-                for msg in response['Messages']['Message']:
-                    pass
+        for selected_page in range(0, page_depth):
+            with core.HRC_Connection() as conn:
+                response = Client(conn).sms.get_sms_list(
+                    page=selected_page + 1
+                )
 
-                result = 'Count: {}' \
-                         '\n\nMessages:' \
-                         .format(response['Count'])
+            if response['Count'] == '0':  # TODO: First page check
+                break
+
+            msg_arr.append('• Page: {}\n'.format(selected_page + 1))
+
+            for msg in response['Messages']['Message']:
+                msg_arr[selected_page] += '  • ID: {}\n    From: {}\n    When: {}\n    Content: {}\n'.format(
+                    msg['Index'], msg['Phone'], msg['Date'], msg['Content'][:40] + '...'
+                )
+
+            for page in msg_arr:
+                cli_output += page
+            cli_output = cli_output[:-1]  # Cut the ending "\n"
+
     except Exception as e:
-        result = 'Can not fetch messages list, reason: "{}"'.format(e)
+        cli_output = 'Can not fetch messages list, reason: "{}"'.format(e)
 
-    click.echo(result)
+    click.echo(cli_output)
