@@ -19,6 +19,7 @@ Hurocon *(**hu**awei **ro**uter **con**trol)* - command line interface tool for 
   - Connection Status
   - Switch Mode
 - SMS Control
+  - Inbox: List, View
   - Send
 
 > There are many features planned for future releases, you can view their full list [here](https://github.com/maximilionus/hurocon/projects/1)
