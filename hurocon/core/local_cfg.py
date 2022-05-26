@@ -1,21 +1,10 @@
-from pathlib import Path
 from shutil import rmtree
 from base64 import b64encode, b64decode
 
-from huawei_lte_api.Connection import Connection
-
 from serialix import JSON_Format
 
+from .const import LOCAL_CONFIG_PATH, LOCAL_CONFIG_DEFAULT
 
-LOCAL_CONFIG_PATH = Path.home() / Path('.config/hurocon/config.json')
-LOCAL_CONFIG_DEFAULT = {
-    "config_version": 2,
-    "connection_address": "http://192.168.8.1/",
-    "auth": {
-        "username": "admin",
-        "password": "YWRtaW4="
-    }
-}
 
 _config_update_checked = False
 
@@ -97,13 +86,3 @@ class AuthConfig():
     @password.setter
     def password(self, passwd: str) -> None:
         self.__password = b64encode(passwd.encode()).decode()
-
-
-class HRC_Connection(Connection):
-    def __init__(self):
-        auth_cfg = AuthConfig()
-        super().__init__(
-            url=auth_cfg.connection_address,
-            username=auth_cfg.username,
-            password=auth_cfg.password
-        )

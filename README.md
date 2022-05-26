@@ -66,23 +66,10 @@ $ hurocon --help
 Each command and subcommand in this tool has a special `--help` flag to display detailed information about it
 
 ### Authentication
-Foremost, you need to specify the authentication details so that this tool can access the device in the future. You do it in two ways.
-
-- In interactive mode:
-  ``` bash
-  $ hurocon auth login
-  ```
-
-- Manually, by running:
-  ```bash
-  # Initialize local configuration file
-  $ hurocon config init
-
-  # Show path to local configuration file
-  $ hurocon config path
-  ```
-
-  And then manually editing the `json` file with any text editor. It has a human-readable structure, so every part of it is exactly what you think it is.
+Foremost, you need to specify the authentication details so that this tool can access the device.
+``` bash
+$ hurocon auth login
+```
 
 ### Testing Connection
 After auth details successfully specified you can test your connection with router by running

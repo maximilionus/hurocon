@@ -1,14 +1,15 @@
 from pprint import pformat
 
 import click
+from click_didyoumean import DYMGroup
 from huawei_lte_api.Client import Client
 from huawei_lte_api.enums.device import ControlModeEnum
 
-from .. import core
 from .root import cli
+from ..core.connection import HRC_Connection
 
 
-@cli.group()
+@cli.group(cls=DYMGroup)
 def device():
     """ Device commands """
     pass
@@ -18,7 +19,7 @@ def device():
 def device_info():
     """ Get device information """
     try:
-        with core.HRC_Connection() as conn:
+        with HRC_Connection() as conn:
             client = Client(conn)
             device_info_str = pformat(
                 client.device.information()
@@ -36,7 +37,7 @@ def device_info():
 def device_reboot():
     """ Reboot the router without any confirmation prompts """
     try:
-        with core.HRC_Connection() as conn:
+        with HRC_Connection() as conn:
             Client(conn).device.set_control(ControlModeEnum.REBOOT)
     except Exception as e:
         msg = 'Execution failed, reason: "{}"'.format(e)
