@@ -67,35 +67,36 @@ def sms_count_all():
 def sms_list(page_depth: int, content_trim: int):
     """ List all sms messages content and other meta-data """
     click.echo('Fetching Messages...'
-               '\n• Page Depth: {}\n• Content Preview Length: {}\n'
+               '\n• Settings: '
+               '\n  • Page Depth: {}'
+               '\n  • Content Preview Length: {}\n'
                .format(page_depth, content_trim)
                )
     try:
-        msg_arr = []
+        cli_output_arr = []
         cli_output = ''
 
-        for selected_page in range(0, page_depth):  # TODO: Re-implement using `..models.sms.get_sms_list_deep()`
-            with HRC_Connection() as conn:
-                response = Client(conn).sms.get_sms_list(
-                    page=selected_page + 1
-                )
+        response = get_sms_list_deep(page_depth)
+        response_pages = response['Messages']['Pages']
 
-            if response['Count'] == '0' and selected_page != 0:
-                break
+        for message_page in range(len(response_pages)):
+            cli_output_arr.append('• Page: {}; Count: {}\n'
+                                  .format(message_page + 1,
+                                          len(response_pages[message_page]))
+                                  )
 
-            msg_arr.append('• Page: {}\n'.format(selected_page + 1))
-
-            for msg in response['Messages']['Message']:
-                msg_arr[selected_page] += '  • Index: {}\n    From: {}\n    When: {}\n    Content: {}\n'.format(
+            for msg in response_pages[message_page]:
+                cli_output_arr[message_page] += '  • Index: {}\n    From: {}\n    When: {}\n    Content: {}\n'.format(
                     msg['Index'], msg['Phone'], msg['Date'], msg['Content'][:content_trim] + '...'
                 )
 
-            for page in msg_arr:
-                cli_output += page
-            cli_output = cli_output[:-1]  # Cut the ending "\n"
-
     except Exception as e:
         cli_output = 'Can not fetch messages list, reason: "{}"'.format(e)
+
+    else:
+        for page in cli_output_arr:
+            cli_output += page
+        cli_output = cli_output[:-1]  # Cut the ending "\n"
 
     click.echo(cli_output)
 
@@ -116,10 +117,11 @@ def sms_view(message_index: int, page_depth: int):
         cli_output = 'Can not fetch messages list, reason: "{}"'.format(e)
     else:
         message_matched = {}
-        for message in response['Messages']['Message']:
-            if str(message_index) == message['Index']:
-                message_matched = message
-                break
+        for page in response['Messages']['Pages']:
+            for message in page:
+                if str(message_index) == message['Index']:
+                    message_matched = message
+                    break
 
         if len(message_matched) > 0:
             cli_output = '• Index: {}\n• From: {}\n• When: {}\n• Content: {}' \
