@@ -1,6 +1,6 @@
 from huawei_lte_api.Client import Client
 
-from ..core.connection import HRC_Connection
+from ...core.connection import HRC_Connection
 
 
 def get_sms_list_deep(page_depth: int = 1) -> dict:

@@ -2,7 +2,7 @@ import click
 from huawei_lte_api.Client import Client
 
 from .root import cli
-from ..models.sms import get_sms_list_deep
+from .models.sms import get_sms_list_deep
 from ..core.connection import HRC_Connection
 
 
@@ -66,6 +66,10 @@ def sms_count_all():
 )
 def sms_list(page_depth: int, content_trim: int):
     """ List all sms messages content and other meta-data """
+    click.echo('Fetching Messages...'
+               '\n• Page Depth: {}\n• Content Preview Length: {}\n'
+               .format(page_depth, content_trim)
+               )
     try:
         msg_arr = []
         cli_output = ''
@@ -82,7 +86,7 @@ def sms_list(page_depth: int, content_trim: int):
             msg_arr.append('• Page: {}\n'.format(selected_page + 1))
 
             for msg in response['Messages']['Message']:
-                msg_arr[selected_page] += '  • ID: {}\n    From: {}\n    When: {}\n    Content: {}\n'.format(
+                msg_arr[selected_page] += '  • Index: {}\n    From: {}\n    When: {}\n    Content: {}\n'.format(
                     msg['Index'], msg['Phone'], msg['Date'], msg['Content'][:content_trim] + '...'
                 )
 
@@ -118,9 +122,9 @@ def sms_view(message_index: int, page_depth: int):
                 break
 
         if len(message_matched) > 0:
-            cli_output = '• Index: {}\n• From: {}\n• Content: {}' \
+            cli_output = '• Index: {}\n• From: {}\n• When: {}\n• Content: {}' \
                          .format(message_matched['Index'], message_matched['Phone'],
-                                 message_matched['Content'])
+                                 message_matched['Date'], message_matched['Content'])
         else:
             cli_output = '• Message with id "{}" was not found'.format(message_index)
 
