@@ -1,11 +1,12 @@
 import click
+from click_didyoumean import DYMGroup
 
 from ..core.local_cfg import LocalConfig
 from ..core.const import LOCAL_CONFIG_PATH
 from .root import cli
 
 
-@cli.group()
+@cli.group(cls=DYMGroup)
 def config():
     """ CLI configuration """
 

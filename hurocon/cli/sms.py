@@ -1,4 +1,5 @@
 import click
+from click_didyoumean import DYMGroup
 from huawei_lte_api.Client import Client
 
 from .root import cli
@@ -6,7 +7,7 @@ from .models.sms import get_sms_list_deep
 from ..core.connection import HRC_Connection
 
 
-@cli.group()
+@cli.group(cls=DYMGroup)
 def sms():
     """ SMS commands """
     pass

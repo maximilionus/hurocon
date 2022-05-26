@@ -1,6 +1,7 @@
 from getpass import getpass
 
 import click
+from click_didyoumean import DYMGroup
 from huawei_lte_api.Client import Client
 
 from .root import cli
@@ -9,7 +10,7 @@ from ..core.connection import HRC_Connection
 from ..core.const import LOCAL_CONFIG_DEFAULT
 
 
-@cli.group()
+@cli.group(cls=DYMGroup)
 def auth():
     """ Router authentication """
     pass

@@ -8,6 +8,7 @@ This project uses [semantic versioning](https://semver.org/). Note that semver p
   - `list`
   - `view`
   - `count`
+- "Did you mean..." prompt on cli command misspelling
 
 ### Changed
 - Enhanced `auth login` visualization
