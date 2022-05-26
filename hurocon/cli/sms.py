@@ -1,9 +1,9 @@
 import click
 from huawei_lte_api.Client import Client
 
-from .. import core
 from .root import cli
 from ..models.sms import get_sms_list_deep
+from ..core.connection import HRC_Connection
 
 
 @cli.group()
@@ -22,7 +22,7 @@ def sms_send(number: str, text: str):
         text = input('Text: ')
 
     try:
-        with core.HRC_Connection() as router_con:
+        with HRC_Connection() as router_con:
             send_status = Client(router_con).sms.send_sms(
                 [number],
                 text
@@ -40,7 +40,7 @@ def sms_send(number: str, text: str):
 def sms_count_all():
     """ Get overall information about stored sms messages """
     try:
-        with core.HRC_Connection() as conn:
+        with HRC_Connection() as conn:
             sms_count_dict = Client(conn).sms.sms_count()
     except Exception as e:
         cli_output = 'Can not get sms information, reason: "{}"'.format(e)
@@ -71,7 +71,7 @@ def sms_list(page_depth: int, content_trim: int):
         cli_output = ''
 
         for selected_page in range(0, page_depth):  # TODO: Re-implement using `..models.sms.get_sms_list_deep()`
-            with core.HRC_Connection() as conn:
+            with HRC_Connection() as conn:
                 response = Client(conn).sms.get_sms_list(
                     page=selected_page + 1
                 )

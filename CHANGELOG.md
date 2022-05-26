@@ -3,6 +3,12 @@ This project uses [semantic versioning](https://semver.org/). Note that semver p
 
 
 ## 0.4.0.dev0
+### Added
+- Inbox SMS messages handling with new commands:
+  - `list`
+  - `view`
+  - `count`
+
 ### Changed
 - Enhanced `auth login` visualization
 

@@ -1,8 +1,8 @@
 import click
 from huawei_lte_api.Client import Client
 
-from .. import core
 from .root import cli
+from ..core.connection import HRC_Connection
 
 
 @cli.group()
@@ -15,7 +15,7 @@ def lte():
 def lte_status():
     """ Get cellular connection status """
     try:
-        with core.HRC_Connection() as conn:
+        with HRC_Connection() as conn:
             con_stat = Client(conn).dial_up.mobile_dataswitch()['dataswitch']
     except Exception as e:
         msg = 'Execution failed, reason: "{}"'.format(e)
@@ -35,7 +35,7 @@ def lte_set_connection(mode: bool):
     MODE (bool): True, False | [Y]es, [N]o | 1, 0
     """
     try:
-        with core.HRC_Connection() as conn:
+        with HRC_Connection() as conn:
             Client(conn).dial_up.set_mobile_dataswitch(int(mode))
     except Exception as e:
         msg = 'Can not switch connection mode, reason: "{}"'.format(e)
