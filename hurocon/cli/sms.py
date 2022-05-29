@@ -17,6 +17,7 @@ def sms():
 @click.option('-n', '--number', default='', help='Number that message will be sent to')
 @click.option('-t', '--text', default='', help='Text of the message to be sent')
 def sms_send(number: str, text: str):
+    """ Send plain-text sms to specified number """
     if len(number) == 0:
         number = input('Number: ')
     if len(text) == 0:
@@ -110,6 +111,11 @@ def sms_list(page_depth: int, content_trim: int):
     help='Depth of pages to be fetched if available'
 )
 def sms_view(message_index: int, page_depth: int):
+    """
+    Show message by index
+
+    Message index can be fetched using the "sms list" command
+    """
     response = {}
 
     try:
