@@ -3,6 +3,8 @@ This project uses [semantic versioning](https://semver.org/). Note that semver p
 
 
 ## 0.4.4 : dev
+### Added
+- `sms view` command will not automatically mark viewed message as read. This behavior can be disabled by passing the new `--dont-mark-read` (`-M`) flag to CLI call.
 ### Changed
 - Project structure enhanced
 

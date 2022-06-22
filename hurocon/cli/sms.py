@@ -110,7 +110,11 @@ def sms_list(page_depth: int, content_trim: int):
     default=1, show_default=True, type=int,
     help='Depth of pages to be fetched if available'
 )
-def sms_view(message_index: int, page_depth: int):
+@click.option(
+    '--dont-mark-read', '-M', 'msg_dont_mark_read',
+    is_flag=True, help='Do not mark viewed message as read'
+)
+def sms_view(message_index: int, page_depth: int, msg_dont_mark_read: bool):
     """
     Show message by index
 
@@ -131,6 +135,14 @@ def sms_view(message_index: int, page_depth: int):
                     break
 
         if len(message_matched) > 0:
+            if not msg_dont_mark_read:
+                try:
+                    with HRC_Connection() as conn:
+                        Client(conn).sms.set_read(message_matched['Index'])
+                except Exception as e:
+                    click.echo('Can not mark viewed message (id: "{}") as read, reason: "{}"'
+                               .format(message_matched['Index'], e))
+
             cli_output = '• Index: {}\n• From: {}\n• When: {}\n• Content: {}' \
                          .format(message_matched['Index'], message_matched['Phone'],
                                  message_matched['Date'], message_matched['Content'])
