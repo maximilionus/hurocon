@@ -118,7 +118,7 @@ def sms_view(message_index: int, page_depth: int, msg_dont_mark_read: bool):
     """
     Show message by index
 
-    Message index can be fetched using the "sms list" command
+    Message indexes can be fetched using the "sms list" command
     """
     response = {}
 
