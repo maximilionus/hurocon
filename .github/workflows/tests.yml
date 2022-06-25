@@ -8,6 +8,26 @@ on:
       - "CHANGELOG.md"
 
 jobs:
+  project_unittests:
+    name: Project Tests
+    runs-on: "ubuntu-latest"
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.10"
+
+      - name: Install Poetry
+        uses: snok/install-poetry@v1.3.1
+        with:
+          virtualenvs-create: false
+
+      - name: Run Tests
+        run: make tests
+
   pkg_install_test:
     name: Test package Install
     runs-on: ${{ matrix.os }}
@@ -21,13 +41,14 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
+
       - name: Set up Python ${{ matrix.python-version }}
-        uses: actions/setup-python@v2
+        uses: actions/setup-python@v4
         with:
           python-version: ${{ matrix.python-version }}
 
       - name: Install Poetry
-        uses: snok/install-poetry@v1
+        uses: snok/install-poetry@v1.3.1
 
       - name: Build Project
         run: |
