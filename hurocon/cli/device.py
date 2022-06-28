@@ -1,4 +1,4 @@
-from pprint import pformat
+import json
 
 import click
 from click_didyoumean import DYMGroup
@@ -16,19 +16,27 @@ def device():
 
 
 @device.command('info')
-def device_info():
+@click.option(
+    '--json', 'as_json', is_flag=True,
+    help='Show data in json format.'
+)
+def device_info(as_json: bool):
     """ Get device information """
     try:
         with HRC_Connection() as conn:
             client = Client(conn)
-            device_info_str = pformat(
-                client.device.information()
-            )
+            device_info_dict = client.device.information()
     except Exception as e:
         msg = 'Can not get device information, reason: "{}"' \
               .format(e)
     else:
-        msg = device_info_str
+        if not as_json:
+            msg = ''
+            for k, v in device_info_dict.items():
+                msg += '• {}: {}\n'.format(k, v)
+            msg = msg[:-1]
+        else:
+            msg = json.dumps(device_info_dict)
 
     click.echo(msg)
 

@@ -14,8 +14,8 @@ def sms():
 
 
 @sms.command('send')
-@click.option('-n', '--number', default='', help='Number that message will be sent to')
-@click.option('-t', '--text', default='', help='Text of the message to be sent')
+@click.option('-n', '--number', default='', help='Number that message will be sent to.')
+@click.option('-t', '--text', default='', help='Text of the message to be sent.')
 def sms_send(number: str, text: str):
     """ Send plain-text sms to specified number """
     if len(number) == 0:
@@ -59,12 +59,12 @@ def sms_count_all():
 @click.option(
     '--page-depth', '-D', 'page_depth',
     default=1, show_default=True, type=int,
-    help='Depth of pages to be fetched if available'
+    help='Depth of pages to be fetched if available.'
 )
 @click.option(
     '--content-trim', '-C', 'content_trim',
     default=40, show_default=True, type=int,
-    help='Trim the message content to specified number of characters'
+    help='Trim the message content to specified number of characters.'
 )
 def sms_list(page_depth: int, content_trim: int):
     """ List all sms messages content and other meta-data """
@@ -108,11 +108,11 @@ def sms_list(page_depth: int, content_trim: int):
 @click.option(
     '--page-depth', '-D', 'page_depth',
     default=1, show_default=True, type=int,
-    help='Depth of pages to be fetched if available'
+    help='Depth of pages to be fetched if available.'
 )
 @click.option(
     '--dont-mark-read', '-M', 'msg_dont_mark_read',
-    is_flag=True, help='Do not mark viewed message as read'
+    is_flag=True, help='Do not mark viewed message as read.'
 )
 def sms_view(message_index: int, page_depth: int, msg_dont_mark_read: bool):
     """

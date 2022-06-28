@@ -2,6 +2,16 @@
 This project uses [semantic versioning](https://semver.org/). Note that semver principles for this tool are only reflected on public part of it - `cli`. Code of this project may be changed in any **not backwards compatible** way without `MAJOR` version incrementation.
 
 
+## 0.4.5 : dev
+### Added
+- `device info` command:
+  - Export all information in json format by passing the `--json` flag
+  - Formatted default mode output
+
+### Changed
+- More consistent output for cli help messages
+
+
 ## 0.4.4 : 2022.06.25
 ### Added
 - `sms view` command will not automatically mark viewed message as read. This behavior can be disabled by passing the new `--dont-mark-read` (`-M`) flag to CLI call.
