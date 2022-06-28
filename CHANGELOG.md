@@ -2,7 +2,7 @@
 This project uses [semantic versioning](https://semver.org/). Note that semver principles for this tool are only reflected on public part of it - `cli`. Code of this project may be changed in any **not backwards compatible** way without `MAJOR` version incrementation.
 
 
-## 0.4.5 : dev
+## 0.4.5 : 2022.06.29
 ### Added
 - `device info` command:
   - Export all information in json format by passing the `--json` flag
