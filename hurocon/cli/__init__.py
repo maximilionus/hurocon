@@ -1,7 +1,8 @@
 def run_cli():
-    from .__cli_base__ import cli
+    from .cli_base import cli
 
     # Initialize CLI modules
-    from . import auth, config, device, sms, lte, net
+    from . import auth, config, device, sms, net, \
+        lte  # Deprecated modules on this line
 
     cli()

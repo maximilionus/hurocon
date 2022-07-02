@@ -1,20 +1,10 @@
-import click
-from click_didyoumean import DYMGroup
+from click import echo
 from huawei_lte_api.Client import Client
 
-from . import net
-from ...core.connection import HRC_Connection
+from ..core.connection import HRC_Connection
 
 
-@net.group(cls=DYMGroup)
-def cellular():
-    """ Cellular connection controls """
-    pass
-
-
-@cellular.command('status')
-def cellular_status():
-    """ Get cellular connection status """
+def cellular_status_impl():
     try:
         with HRC_Connection() as conn:
             con_stat = Client(conn).dial_up.mobile_dataswitch()['dataswitch']
@@ -24,17 +14,10 @@ def cellular_status():
         msg = 'Connected to cellular network' if con_stat == '1' else \
               'No connection to cellular network'
 
-    click.echo(msg)
+    echo(msg)
 
 
-@cellular.command('set')
-@click.argument('mode', required=True, type=bool)
-def cellular_set_connection(mode: bool):
-    """
-    Enable or disable cellular connection
-
-    MODE (bool): True, False | [Y]es, [N]o | 1, 0
-    """
+def cellular_set_connection_impl(mode: bool):
     try:
         with HRC_Connection() as conn:
             Client(conn).dial_up.set_mobile_dataswitch(int(mode))
@@ -43,4 +26,4 @@ def cellular_set_connection(mode: bool):
     else:
         msg = 'Successfully {} cellular data'.format('enabled' if mode else 'disabled')
 
-    click.echo(msg)
+    echo(msg)
