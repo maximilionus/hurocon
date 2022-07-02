@@ -2,7 +2,7 @@ import click
 from click_didyoumean import DYMGroup
 from huawei_lte_api.Client import Client
 
-from .root import cli
+from .__cli_base__ import cli
 from .impl.sms import get_sms_list_deep
 from ..core.connection import HRC_Connection
 

@@ -2,6 +2,16 @@
 This project uses [semantic versioning](https://semver.org/). Note that semver principles for this tool are only reflected on public part of it - `cli`. Code of this project may be changed in any **not backwards compatible** way without `MAJOR` version incrementation.
 
 
+## 0.5.0 : dev
+### Added
+- `net` commands group
+  - `lan` - LAN connection controls
+  - `cellular` - Cellular connection controls (Replacement for deprecated `lte` commands group)
+
+### Deprecated
+- `lte` commands group deprecated, will be removed in version `1.0.0`
+
+
 ## 0.4.5 : 2022.06.29
 ### Added
 - `device info` command:

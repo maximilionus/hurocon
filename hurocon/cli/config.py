@@ -3,7 +3,7 @@ from click_didyoumean import DYMGroup
 
 from ..core.local_cfg import LocalConfig
 from ..core.const import LOCAL_CONFIG_PATH
-from .root import cli
+from .__cli_base__ import cli
 
 
 @cli.group(cls=DYMGroup)

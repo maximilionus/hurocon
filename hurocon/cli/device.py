@@ -5,7 +5,7 @@ from click_didyoumean import DYMGroup
 from huawei_lte_api.Client import Client
 from huawei_lte_api.enums.device import ControlModeEnum
 
-from .root import cli
+from .__cli_base__ import cli
 from ..core.connection import HRC_Connection
 
 

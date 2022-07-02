@@ -2,22 +2,18 @@ import click
 from click_didyoumean import DYMGroup
 from huawei_lte_api.Client import Client
 
-from .__cli_base__ import cli
-from ..core.connection import HRC_Connection
+from . import net
+from ...core.connection import HRC_Connection
 
 
-@cli.group(cls=DYMGroup)
-def lte():
-    """
-    [DEPRECATED] Cellular connection controls
-
-    This cli group will be removed in `1.0.0` version
-    """
+@net.group(cls=DYMGroup)
+def cellular():
+    """ Cellular connection controls """
     pass
 
 
-@lte.command('status')
-def lte_status():
+@cellular.command('status')
+def cellular_status():
     """ Get cellular connection status """
     try:
         with HRC_Connection() as conn:
@@ -31,9 +27,9 @@ def lte_status():
     click.echo(msg)
 
 
-@lte.command('set')
+@cellular.command('set')
 @click.argument('mode', required=True, type=bool)
-def lte_set_connection(mode: bool):
+def cellular_set_connection(mode: bool):
     """
     Enable or disable cellular connection
 
