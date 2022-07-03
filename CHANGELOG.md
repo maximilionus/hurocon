@@ -17,7 +17,7 @@ This project uses [semantic versioning](https://semver.org/). Note that semver p
 
 ### Deprecated
 - `lte` cli group deprecated and will be removed in version `1.0.0`. Still can be accessed, inherits all implementation from `net cellular` cli group and removed from help messages.
-  > Use `net cellular` sub-group instead
+  > Use `net cellular` cli sub-group instead
 
 
 ## 0.4.5 : 2022.06.29
