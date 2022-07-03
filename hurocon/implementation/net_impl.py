@@ -9,12 +9,12 @@ def cellular_status_impl():
         with HRC_Connection() as conn:
             con_stat = Client(conn).dial_up.mobile_dataswitch()['dataswitch']
     except Exception as e:
-        msg = 'Execution failed, reason: "{}"'.format(e)
+        cli_msg = 'Execution failed, reason: "{}"'.format(e)
     else:
-        msg = 'Connected to cellular network' if con_stat == '1' else \
-              'No connection to cellular network'
+        cli_msg = 'Connected to cellular network' if con_stat == '1' else \
+                  'No connection to cellular network'
 
-    echo(msg)
+    echo(cli_msg)
 
 
 def cellular_set_connection_impl(mode: bool):
@@ -22,8 +22,32 @@ def cellular_set_connection_impl(mode: bool):
         with HRC_Connection() as conn:
             Client(conn).dial_up.set_mobile_dataswitch(int(mode))
     except Exception as e:
-        msg = 'Can not switch connection mode, reason: "{}"'.format(e)
+        cli_msg = 'Can not switch connection mode, reason: "{}"'.format(e)
     else:
-        msg = 'Successfully {} cellular data'.format('enabled' if mode else 'disabled')
+        cli_msg = 'Successfully {} cellular data'.format('enabled' if mode else 'disabled')
 
-    echo(msg)
+    echo(cli_msg)
+
+
+def lan_list_connected_impl(count_only: bool):
+    cli_msg = ''
+    try:
+        with HRC_Connection() as conn:
+            response = Client(conn).wlan.host_list()
+            devices: list = response['Hosts']['Host']
+
+            cli_msg += '• Devices Connected: {}'.format(len(devices))
+
+            if not count_only:
+                cli_msg += '\n\n'
+                for device in devices:
+                    line = 1
+                    for k, v in device.items():
+                        cli_msg += '• ' if line == 1 else '  '
+                        cli_msg += '{}: {}\n'.format(k, v)
+                        line += 1
+                cli_msg = cli_msg[:-1]  # Cut the ending `\n`
+    except Exception as e:
+        cli_msg = 'Cannot process the lan devices list, reason: "{}"'.format(e)
+
+    echo(cli_msg)

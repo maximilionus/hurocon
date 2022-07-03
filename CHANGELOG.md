@@ -6,16 +6,17 @@ This project uses [semantic versioning](https://semver.org/). Note that semver p
 ### Added
 - `net` cli commands group
   - `lan` - LAN connection controls
+    - `list` - List all connected devices
   - `cellular` - Cellular connection controls *(Replacement for deprecated `lte` commands group)*
 
 ### Changed
-- Code structure enhanced
+- Global source code structure enhancements
 
 ### Fixed
 - Fixed warning messages in `sms view` when marking message as read
 
 ### Deprecated
-- `lte` cli group deprecated, will be removed in version `1.0.0`. Still can be accessed, but inherits all implementation from `net cellular` and removed from help messages.
+- `lte` cli group deprecated and will be removed in version `1.0.0`. Still can be accessed, inherits all implementation from `net cellular` cli group and removed from help messages.
   > Use `net cellular` sub-group instead
 
 

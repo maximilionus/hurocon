@@ -42,7 +42,12 @@ def lan():
 
 
 @lan.command('list')
-def lan_list_connected():
+@click.option(
+    '--count-only', '-C', 'count_only',
+    is_flag=True,
+    help='Show only number of connected devices, no additional info'
+)
+# ? How 'bout json output support ?
+def lan_list_connected(count_only: bool):
     """ List devices connected to network """
-    # ! Implement this before stable release or hide it 👍
-    print("❌ - proto for 'huawei_lte_api.api.WLan.host_list' 😅")
+    net_impl.lan_list_connected_impl(count_only)
