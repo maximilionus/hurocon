@@ -1,9 +1,9 @@
 import json
 
-from click import echo
 from huawei_lte_api.Client import Client
 from huawei_lte_api.enums.device import ControlModeEnum
 
+from ..core.io import printx
 from ..core.connection import HRC_Connection
 
 
@@ -25,7 +25,7 @@ def device_info_impl(as_json: bool):
         else:
             msg = json.dumps(device_info_dict)
 
-    echo(msg)
+    printx(msg)
 
 
 def device_reboot_impl():
@@ -38,4 +38,4 @@ def device_reboot_impl():
     else:
         msg = 'Rebooting the device, router will restart in several moments'
 
-    echo(msg)
+    printx(msg, limit_line_length=True)

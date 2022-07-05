@@ -1,8 +1,11 @@
+from sys import exit
 from shutil import rmtree
 from base64 import b64encode, b64decode
 
 from serialix import JSON_Format
 
+from .. import meta
+from .io import printx
 from .const import LOCAL_CONFIG_PATH, LOCAL_CONFIG_DEFAULT
 
 
@@ -25,7 +28,28 @@ class LocalConfig(JSON_Format):
 
         if not _config_update_checked:
             local_version = self['config_version']
-            if local_version < LOCAL_CONFIG_DEFAULT['config_version']:
+            builtin_version = LOCAL_CONFIG_DEFAULT['config_version']
+
+            if local_version > builtin_version:
+                # Exit if local config was generated with newer version hurocon
+                printx(
+                    '! Version of the local configuration file is newer than {app_name} ({app_version}) supports.'
+                    '\n\n• Local version: {confv_local}'
+                    '\n• Supported version: {confv_builtin}'
+                    .format(app_name=meta.name, app_version=meta.version,
+                            confv_local=local_version, confv_builtin=builtin_version),
+                    limit_line_length=True
+                )
+                printx(
+                    '\nThis may happen when you downgrade the version of {app_name} '
+                    'to version, that used the old version of configuration system. '
+                    'Consider upgrading to a newer version or clean the configuration.'
+                    ' You can erase all configuration files running this command:'
+                    '\n\n\t$ hurocon config remove',
+                    limit_line_length=True
+                )
+                exit()
+            elif local_version < builtin_version:
                 if local_version < 2:
                     self['connection_address'] = 'http://{}/'.format(
                         self['connection_ip']
@@ -37,7 +61,7 @@ class LocalConfig(JSON_Format):
                         self['auth']['password'].encode()
                     ).decode()
 
-                self['config_version'] = LOCAL_CONFIG_DEFAULT['config_version']
+                self['config_version'] = builtin_version
                 self.commit()
 
             _config_update_checked = True

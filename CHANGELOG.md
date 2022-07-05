@@ -11,6 +11,7 @@ This project uses [semantic versioning](https://semver.org/). Note that semver p
 
 ### Changed
 - Global source code structure enhancements
+- Enhanced output formatting, new wrapper
 
 ### Fixed
 - Fixed warning messages in `sms view` when marking message as read

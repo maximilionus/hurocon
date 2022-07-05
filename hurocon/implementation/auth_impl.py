@@ -1,15 +1,15 @@
 from getpass import getpass
 
-from click import echo
 from huawei_lte_api.Client import Client
 
+from ..core.io import printx
 from ..core.local_cfg import AuthConfig
 from ..core.connection import HRC_Connection
 from ..core.const import LOCAL_CONFIG_DEFAULT
 
 
 def auth_login_impl():
-    echo('Authentication Configurator\n')
+    printx('Authentication Configurator\n')
     con_ip = input(
         '  (leave empty to use "{}")\n'
         '• Full address to router: '
@@ -26,13 +26,13 @@ def auth_login_impl():
 
     auth_cfg.commit()
 
-    echo("\nAuthentication details successfully specified")
+    printx("\nAuthentication details successfully specified")
 
 
 def auth_logout_impl():
     AuthConfig().reset()
     AuthConfig().commit()
-    echo("All authentication details removed")
+    printx("All authentication details removed")
 
 
 def auth_test_connection_impl():
@@ -44,4 +44,4 @@ def auth_test_connection_impl():
     else:
         msg = 'Successful Authentication'
 
-    echo(msg)
+    printx(msg, limit_line_length=True)

@@ -1,6 +1,6 @@
-from click import echo
 from huawei_lte_api.Client import Client
 
+from ..core.io import printx, prettify
 from ..core.connection import HRC_Connection
 
 
@@ -58,11 +58,14 @@ def sms_send_impl(number: str, text: str):
             )
 
         if send_status.lower() == 'ok':
-            echo('SMS sent successfully to {}'.format(number))
+            printx('SMS sent successfully to {}'.format(number),
+                   limit_line_length=True)
         else:
-            echo('SMS was not sent, reason: "{}"'.format(send_status))
+            printx('SMS was not sent, reason: "{}"'.format(send_status),
+                   limit_line_length=True)
     except Exception as e:
-        echo('Execution failed, reason: "{}"'.format(e))
+        printx('Execution failed, reason: "{}"'.format(e),
+               limit_line_length=True)
 
 
 def sms_count_all_impl():
@@ -70,23 +73,23 @@ def sms_count_all_impl():
         with HRC_Connection() as conn:
             sms_count_dict = Client(conn).sms.sms_count()
     except Exception as e:
-        cli_output = 'Can not get sms information, reason: "{}"'.format(e)
+        cli_output = prettify('Can not get sms information, reason: "{}"'.format(e))
     else:
         cli_output = ''
         for key, value in sms_count_dict.items():
             cli_output += '• {}: {}\n'.format(key, value)
         cli_output = cli_output[:-1]
 
-    echo(cli_output)
+    printx(cli_output)
 
 
 def sms_list_impl(page_depth: int, content_trim: int):
-    echo('Fetching Messages...'
-         '\n• Settings: '
-         '\n  • Page Depth: {}'
-         '\n  • Content Preview Length: {}\n'
-         .format(page_depth, content_trim)
-         )
+    printx('Fetching Messages...'
+           '\n• Settings: '
+           '\n  • Page Depth: {}'
+           '\n  • Content Preview Length: {}\n'
+           .format(page_depth, content_trim)
+           )
     try:
         cli_output_arr = []
         cli_output = ''
@@ -106,14 +109,14 @@ def sms_list_impl(page_depth: int, content_trim: int):
                 )
 
     except Exception as e:
-        cli_output = 'Can not fetch messages list, reason: "{}"'.format(e)
+        cli_output = prettify('Can not fetch messages list, reason: "{}"'.format(e))
 
     else:
         for page in cli_output_arr:
             cli_output += page
         cli_output = cli_output[:-1]  # Cut the ending "\n"
 
-    echo(cli_output)
+    printx(cli_output)
 
 
 def sms_view_impl(message_index: int, page_depth: int, msg_dont_mark_read: bool):
@@ -145,6 +148,6 @@ def sms_view_impl(message_index: int, page_depth: int, msg_dont_mark_read: bool)
                          .format(message_matched['Index'], message_matched['Phone'],
                                  message_matched['Date'], message_matched['Content'])
         else:
-            cli_output = '• Message with id "{}" was not found'.format(message_index)
+            cli_output = prettify('• Message with id "{}" was not found'.format(message_index))
 
-    echo(cli_output)
+    printx(cli_output)

@@ -1,6 +1,6 @@
-from click import echo
 from huawei_lte_api.Client import Client
 
+from ..core.io import printx
 from ..core.connection import HRC_Connection
 
 
@@ -14,7 +14,7 @@ def cellular_status_impl():
         cli_msg = 'Connected to cellular network' if con_stat == '1' else \
                   'No connection to cellular network'
 
-    echo(cli_msg)
+    printx(cli_msg, limit_line_length=True)
 
 
 def cellular_set_connection_impl(mode: bool):
@@ -26,7 +26,7 @@ def cellular_set_connection_impl(mode: bool):
     else:
         cli_msg = 'Successfully {} cellular data'.format('enabled' if mode else 'disabled')
 
-    echo(cli_msg)
+    printx(cli_msg, limit_line_length=True)
 
 
 def lan_list_connected_impl(count_only: bool):
@@ -50,4 +50,4 @@ def lan_list_connected_impl(count_only: bool):
     except Exception as e:
         cli_msg = 'Cannot process the lan devices list, reason: "{}"'.format(e)
 
-    echo(cli_msg)
+    printx(cli_msg)
