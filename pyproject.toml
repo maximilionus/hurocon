@@ -30,7 +30,7 @@ hurocon = "hurocon:__main__"
 
 [tool.poetry.dependencies]
 python = "^3.7"
-serialix = "^2.3.1"
+serialix = "^2.4.1"
 huawei-lte-api = "^1.6.0"
 click = "^8.1.2"
 click-didyoumean = "^0.3.0"
