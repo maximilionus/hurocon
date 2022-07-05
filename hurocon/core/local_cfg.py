@@ -31,7 +31,7 @@ class LocalConfig(JSON_Format):
             builtin_version = LOCAL_CONFIG_DEFAULT['config_version']
 
             if local_version > builtin_version:
-                # Exit if local config was generated with newer version hurocon
+                # Exit if local config was generated with newer version of hurocon
                 printx(
                     '! Version of the local configuration file is newer than {app_name} ({app_version}) supports.'
                     '\n\n• Local version: {confv_local}'
@@ -41,11 +41,11 @@ class LocalConfig(JSON_Format):
                     limit_line_length=True
                 )
                 printx(
-                    '\nThis may happen when you downgrade the version of {app_name} '
-                    'to version, that used the old version of configuration system. '
-                    'Consider upgrading to a newer version or clean the configuration.'
-                    ' You can erase all configuration files running this command:'
-                    '\n\n\t$ hurocon config remove',
+                    '\nThis may happen when you downgrade {app_name} to version, that'
+                    ' used the old scheme of configuration system. Consider upgrading'
+                    ' to a newer version of {app_name} or clean the configuration '
+                    'files. You can erase all configuration files running this command:'
+                    '\n\n\t$ hurocon config remove'.format(app_name=meta.name),
                     limit_line_length=True
                 )
                 exit()
