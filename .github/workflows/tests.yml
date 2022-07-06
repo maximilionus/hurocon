@@ -25,6 +25,9 @@ jobs:
         with:
           virtualenvs-create: false
 
+      - name: Install dependencies
+        run: poetry install
+
       - name: Run Tests
         run: make tests
 
