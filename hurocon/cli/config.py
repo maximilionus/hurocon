@@ -1,7 +1,7 @@
 from click_didyoumean import DYMGroup
 
 from .cli_base import cli
-from ..implementation import config_impl
+from ..implementation import iconfig
 
 
 @cli.group(cls=DYMGroup)
@@ -17,13 +17,13 @@ def config_init():
     File will only be generated if no configuration file already exists
     on default path.
     """
-    config_impl.config_init_impl()
+    iconfig.config_init_impl()
 
 
 @config.command('remove')
 def config_remove():
     """ Erase local configuration """
-    config_impl.config_remove_impl()
+    iconfig.config_remove_impl()
 
 
 @config.command('path')
@@ -35,10 +35,10 @@ def config_get_path():
     doesn't mean that this file actually exists at the time the command is
     called
     """
-    config_impl.config_get_path_impl()
+    iconfig.config_get_path_impl()
 
 
 @config.command('exist')
 def config_exist():
     """ Check does the local configuration file exists """
-    config_impl.config_exist_impl()
+    iconfig.config_exist_impl()

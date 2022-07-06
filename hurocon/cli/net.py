@@ -2,7 +2,7 @@ import click
 from click_didyoumean import DYMGroup
 
 from .cli_base import cli
-from ..implementation import net_impl
+from ..implementation import inet
 
 
 @cli.group(cls=DYMGroup)
@@ -21,7 +21,7 @@ def cellular():
 @cellular.command('status')
 def cellular_status():
     """ Get cellular connection status """
-    net_impl.cellular_status_impl()
+    inet.cellular_status_impl()
 
 
 @cellular.command('set')
@@ -32,7 +32,7 @@ def cellular_set_connection(mode: bool):
 
     MODE (bool): True, False | [Y]es, [N]o | 1, 0
     """
-    net_impl.cellular_set_connection_impl(mode)
+    inet.cellular_set_connection_impl(mode)
 
 
 # LAN cli group
@@ -50,4 +50,4 @@ def lan():
 # ? How 'bout json output support ?
 def lan_list_connected(count_only: bool):
     """ List devices connected to network """
-    net_impl.lan_list_connected_impl(count_only)
+    inet.lan_list_connected_impl(count_only)

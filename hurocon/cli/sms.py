@@ -2,7 +2,7 @@ import click
 from click_didyoumean import DYMGroup
 
 from .cli_base import cli
-from ..implementation import sms_impl
+from ..implementation import isms
 
 
 @cli.group(cls=DYMGroup)
@@ -16,13 +16,13 @@ def sms():
 @click.option('-t', '--text', default='', help='Text of the message to be sent.')
 def sms_send(number: str, text: str):
     """ Send plain-text sms to specified number """
-    sms_impl.sms_send_impl(number, text)
+    isms.sms_send_impl(number, text)
 
 
 @sms.command('count')
 def sms_count_all():
     """ Get overall information about stored sms messages """
-    sms_impl.sms_count_all_impl()
+    isms.sms_count_all_impl()
 
 
 @sms.command('list')
@@ -38,7 +38,7 @@ def sms_count_all():
 )
 def sms_list(page_depth: int, content_trim: int):
     """ List all sms messages content and other meta-data """
-    sms_impl.sms_list_impl(page_depth, content_trim)
+    isms.sms_list_impl(page_depth, content_trim)
 
 
 @sms.command('view')
@@ -58,4 +58,4 @@ def sms_view(message_index: int, page_depth: int, msg_dont_mark_read: bool):
 
     Message indexes can be fetched using the "sms list" command
     """
-    sms_impl.sms_view_impl(message_index, page_depth, msg_dont_mark_read)
+    isms.sms_view_impl(message_index, page_depth, msg_dont_mark_read)

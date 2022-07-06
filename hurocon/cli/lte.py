@@ -7,7 +7,7 @@ import click
 from click_didyoumean import DYMGroup
 
 from .cli_base import cli
-from ..implementation import net_impl
+from ..implementation import inet
 
 
 @cli.group(cls=DYMGroup, hidden=True)
@@ -23,7 +23,7 @@ def lte():
 @lte.command('status')
 def lte_status():
     """ Get cellular connection status """
-    net_impl.cellular_status_impl()
+    inet.cellular_status_impl()
 
 
 @lte.command('set')
@@ -34,4 +34,4 @@ def lte_set_connection(mode: bool):
 
     MODE (bool): True, False | [Y]es, [N]o | 1, 0
     """
-    net_impl.cellular_set_connection_impl(mode)
+    inet.cellular_set_connection_impl(mode)

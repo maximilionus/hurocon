@@ -2,7 +2,7 @@ import click
 from click_didyoumean import DYMGroup
 
 from .cli_base import cli
-from ..implementation import device_impl
+from ..implementation import idevice
 
 
 @cli.group(cls=DYMGroup)
@@ -18,10 +18,10 @@ def device():
 )
 def device_info(as_json: bool):
     """ Get device information """
-    device_impl.device_info_impl(as_json)
+    idevice.device_info_impl(as_json)
 
 
 @device.command('reboot')
 def device_reboot():
     """ Reboot the router without any confirmation prompts """
-    device_impl.device_reboot_impl()
+    idevice.device_reboot_impl()
