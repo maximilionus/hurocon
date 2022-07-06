@@ -27,7 +27,7 @@ jobs:
         run: poetry install
 
       - name: Run Tests
-        run: poetry run python ./tests/
+        run: poetry run python ./tests/ -v
 
   pkg_install_test:
     name: Test package Install
