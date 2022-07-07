@@ -9,5 +9,5 @@ This testing suite is based on native [`unittest`](https://docs.python.org/3/lib
   ```bash
   $ python ./tests/
   ```
-  > For more details, execute this command with `-v` flag
+  > For more detailed output, execute this command with `-v` flag
 - Get the results
