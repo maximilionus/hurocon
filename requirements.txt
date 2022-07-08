@@ -55,9 +55,9 @@ pycryptodomex==3.15.0; python_version >= "3.4" and python_full_version < "3.0.0"
 requests==2.28.1; python_version >= "3.7" and python_version < "4" \
     --hash=sha256:8fefa2a1a1365bf5520aac41836fbee479da67864514bdb821f31ce07ce65349 \
     --hash=sha256:7c5599b102feddaa661c826c56ab4fee28bfd17f5abca1ebbe3e7f19d7c97983
-serialix==2.4.0; python_version >= "3.5" and python_version < "4.0" \
-    --hash=sha256:e2c80a5ea27ba6765e87d7ae333ac000fba89a3d9d3667d5e778f1b9f6ec27bf \
-    --hash=sha256:adb6a7d612df9f7eec4ab330d30381f78981f3b94e30a4526f094992b99a0145
+serialix==2.4.1; python_version >= "3.5" and python_version < "4.0" \
+    --hash=sha256:fc460eaf080181e3052d0fcd47bc915770b9ba062f4b831330ddb0c07fd5d525 \
+    --hash=sha256:99af1ad1c6b1a34cb07f73aab00b1c795afd41ce478da9ae448478fa080c677d
 typing-extensions==4.3.0; python_version < "3.8" and python_version >= "3.7" \
     --hash=sha256:25642c956049920a5aa49edcdd6ab1e06d7e5d467fc00e0506c44ac86fbfca02 \
     --hash=sha256:e6d2677a32f47fc7eb2795db1dd15c1f34eff616bcaf2cfb5e997f854fa1c4a6

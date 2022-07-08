@@ -2,6 +2,11 @@
 This project uses [semantic versioning](https://semver.org/). Note that semver principles for this tool are only reflected on public part of it - `cli`. Code of this project may be changed in any **not backwards compatible** way without `MAJOR` version incrementation.
 
 
+## 0.5.1 : 2022.07.08
+### Changed
+- Enhanced deprecation notice for `lte` cli group help message
+
+
 ## 0.5.0 : 2022.07.08
 ### Added
 - `net` cli commands group

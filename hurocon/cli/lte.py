@@ -15,7 +15,8 @@ def lte():
     """
     [DEPRECATED] Cellular connection controls
 
-    This cli group will be removed in `1.0.0` version
+    This cli group will be removed in "1.0.0" version,
+    use "net cellular" cli group instead.
     """
     pass
 
