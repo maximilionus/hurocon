@@ -1,5 +1,5 @@
 # Hurocon Changelog
-This project uses [semantic versioning](https://semver.org/). Note that semver principles for this tool are only reflected on public part of it - `cli`. Code of this project may be changed in any **not backwards compatible** way without `MAJOR` version incrementation.
+This project uses [semantic versioning](https://semver.org/). Note that semver rules for this project are only used on public part of it - `cli`. Source code of this project may be changed in any **not backwards compatible** way without `MAJOR` version incrementation.
 
 
 ## 0.5.1 : 2022.07.08
