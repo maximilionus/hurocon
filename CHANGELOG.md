@@ -2,11 +2,12 @@
 This project uses [semantic versioning](https://semver.org/). Note that semver rules for this project are only used on public part of it - `cli`. Source code of this project may be changed in any **not backwards compatible** way without `MAJOR` version incrementation.
 
 
-## 0.5.2 : dev
+## 0.6.0 : dev
+### Added
+- Added connection timeout *(5 seconds by default)*. Value should be `float` type in seconds and can be configured from local config.
 
 ### Tweaked
 - Configuration file bumped to version `3`
-- Added connection timeout *(5 seconds by default)*. Value should be `float` type and can be configured from local config.
 
 
 ## 0.5.1 : 2022.07.08
