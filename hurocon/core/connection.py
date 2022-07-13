@@ -1,6 +1,6 @@
 from huawei_lte_api.Connection import Connection
 
-from .local_cfg import AuthConfig
+from .local_cfg import AuthConfig, LocalConfig
 
 
 class HRC_Connection(Connection):
@@ -9,5 +9,6 @@ class HRC_Connection(Connection):
         super().__init__(
             url=auth_cfg.connection_address,
             username=auth_cfg.username,
-            password=auth_cfg.password
+            password=auth_cfg.password,
+            timeout=LocalConfig()['connection']['timeout']
         )

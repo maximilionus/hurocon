@@ -61,6 +61,14 @@ class LocalConfig(JSON_Format):
                         self['auth']['password'].encode()
                     ).decode()
 
+                if local_version < 3:
+                    self['connection'] = {
+                        'address': self['connection_address'],
+                        'timeout': LOCAL_CONFIG_DEFAULT['connection']['timeout']
+                    }
+
+                    del(self['connection_address'])
+
                 self['config_version'] = builtin_version
                 self.commit()
 
@@ -91,7 +99,7 @@ class AuthConfig():
         self.__cfg = LocalConfig()
         self.username = self.__cfg['auth']['username']
         self.__password = self.__cfg['auth']['password']
-        self.connection_address = self.__cfg['connection_address']
+        self.connection_address = self.__cfg['connection']['address']
 
     def commit(self):
         self.__cfg['auth']['username'] = self.username
