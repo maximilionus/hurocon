@@ -13,7 +13,7 @@ def auth_login_impl():
     con_ip = input(
         '  (leave empty to use "{}")\n'
         '• Full address to router: '
-        .format(LOCAL_CONFIG_DEFAULT['connection_address'])
+        .format(LOCAL_CONFIG_DEFAULT['connection']['address'])
     )
     uname = input('• Username: ')
     passwd = getpass('• Password: ')
@@ -22,7 +22,7 @@ def auth_login_impl():
     auth_cfg.username = uname
     auth_cfg.password = passwd
     auth_cfg.connection_address = con_ip if len(con_ip) > 0 else \
-        LOCAL_CONFIG_DEFAULT['connection_address']
+        LOCAL_CONFIG_DEFAULT['connection']['address']
 
     auth_cfg.commit()
 
