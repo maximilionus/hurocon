@@ -34,6 +34,7 @@ serialix = "^2.4.1"
 huawei-lte-api = "^1.6.0"
 click = "^8.1.2"
 click-didyoumean = "^0.3.0"
+jsonschema = "^4.7.2"
 
 [tool.poetry.dev-dependencies]
 

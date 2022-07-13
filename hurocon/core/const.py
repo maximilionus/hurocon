@@ -13,3 +13,14 @@ LOCAL_CONFIG_DEFAULT = {
         "password": "YWRtaW4="
     }
 }
+LOCAL_CONFIG_SCHEMA = {'type': 'object',
+                       'properties': {'config_version': {'type': 'integer'},
+                                      'auth': {'type': 'object',
+                                               'properties': {'username': {'type': 'string'},
+                                                              'password': {'type': 'string'}},
+                                               'required': ['username', 'password']},
+                                      'connection': {'type': 'object',
+                                                     'properties': {'address': {'type': 'string'},
+                                                                    'timeout': {'type': 'number'}},
+                                                     'required': ['address', 'timeout']}},
+                       'required': ['config_version', 'auth', 'connection']}

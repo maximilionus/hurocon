@@ -4,10 +4,12 @@ This project uses [semantic versioning](https://semver.org/). Note that semver r
 
 ## 0.6.0 : dev
 ### Added
-- Added connection timeout *(5 seconds by default)*. Value should be `float` type in seconds and can be configured from local config.
+- Connection timeout feature *(5 seconds by default)*. Value should be `float` type in seconds and can be configured in local config.
+- Configuration file integrity check implemented. User now will be notified if something wrong with it.
 
 ### Tweaked
-- Configuration file bumped to version `3`
+> All changes now will be placed here, in **Tweaked**, instead of the **Changed**
+- Configuration file bumped to version `3`, migration **is supported**
 
 
 ## 0.5.1 : 2022.07.08

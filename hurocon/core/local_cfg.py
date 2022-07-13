@@ -1,12 +1,13 @@
-from sys import exit
+from sys import exit  # Base for `pyinstaller` impl. Default exit() will not work.
 from shutil import rmtree
 from base64 import b64encode, b64decode
 
+import jsonschema
 from serialix import JSON_Format
 
 from .. import meta
 from .io import printx
-from .const import LOCAL_CONFIG_PATH, LOCAL_CONFIG_DEFAULT
+from .const import LOCAL_CONFIG_PATH, LOCAL_CONFIG_DEFAULT, LOCAL_CONFIG_SCHEMA
 
 
 _config_update_checked = False
@@ -22,12 +23,14 @@ class LocalConfig(JSON_Format):
 
         if self.file_exists():
             self.__check_updates()
+            self.__validate_schema()
 
     def __check_updates(self):
         global _config_update_checked
 
         if not _config_update_checked:
-            local_version = self['config_version']
+            local_version = self.get('config_version', None)
+            if local_version is None: self.__config_corrupted_notice()
             builtin_version = LOCAL_CONFIG_DEFAULT['config_version']
 
             if local_version > builtin_version:
@@ -52,27 +55,46 @@ class LocalConfig(JSON_Format):
             elif local_version < builtin_version:
                 if local_version < 2:
                     self['connection_address'] = 'http://{}/'.format(
-                        self['connection_ip']
+                        self.get('connection_ip', '')
                     )
 
-                    del(self['connection_ip'])
+                    self.pop('connection_ip', None)
 
                     self['auth']['password'] = b64encode(
-                        self['auth']['password'].encode()
+                        self
+                        .get('auth', {})
+                        .get('password',
+                             LOCAL_CONFIG_DEFAULT['auth']['password']
+                             ).encode()
                     ).decode()
 
                 if local_version < 3:
                     self['connection'] = {
-                        'address': self['connection_address'],
+                        'address': self.get('connection_address',
+                                            LOCAL_CONFIG_DEFAULT['connection']['address']),
                         'timeout': LOCAL_CONFIG_DEFAULT['connection']['timeout']
                     }
 
-                    del(self['connection_address'])
+                    self.pop('connection_address', None)
 
                 self['config_version'] = builtin_version
                 self.commit()
 
             _config_update_checked = True
+
+    def __validate_schema(self):
+        try:
+            jsonschema.validate(self.dictionary, LOCAL_CONFIG_SCHEMA)
+        except Exception:
+            self.__config_corrupted_notice()
+
+    @staticmethod
+    def __config_corrupted_notice():
+        printx('! Configuration file is corrupted'
+               '\n│ Please reset it by running the following commands'
+               '\n├   $ hurocon config remove'
+               '\n└   $ hurocon config init')
+        exit()
 
     @staticmethod
     def erase_config() -> bool:
@@ -104,7 +126,7 @@ class AuthConfig():
     def commit(self):
         self.__cfg['auth']['username'] = self.username
         self.__cfg['auth']['password'] = self.__password
-        self.__cfg['connection_address'] = self.connection_address
+        self.__cfg['connection']['address'] = self.connection_address
         self.__cfg.commit()
 
     def reset(self):
