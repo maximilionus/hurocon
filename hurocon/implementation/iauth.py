@@ -8,15 +8,21 @@ from ..core.connection import HRC_Connection
 from ..core.const import LOCAL_CONFIG_DEFAULT
 
 
-def auth_login_impl():
-    printx('Authentication Configurator\n')
-    con_ip = input(
-        '  (leave empty to use "{}")\n'
-        '• Full address to router: '
-        .format(LOCAL_CONFIG_DEFAULT['connection']['address'])
-    )
-    uname = input('• Username: ')
-    passwd = getpass('• Password: ')
+def auth_login_impl(username: str, password: str, connection_address: str):
+    if None in (username, password):
+        printx('Authentication Configurator\n')
+        con_ip = input(
+            '  (leave empty to use "{}")\n'
+            '• Full address to router: '
+            .format(LOCAL_CONFIG_DEFAULT['connection']['address'])
+        )
+        uname = input('• Username: ')
+        passwd = getpass('• Password: ')
+    else:
+        con_ip = connection_address if connection_address is not None \
+            else LOCAL_CONFIG_DEFAULT['connection']['address']
+        uname = username
+        passwd = password
 
     auth_cfg = AuthConfig()
     auth_cfg.username = uname

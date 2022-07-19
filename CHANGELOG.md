@@ -6,6 +6,10 @@ This project uses [semantic versioning](https://semver.org/). Note that semver r
 ### Added
 - Connection timeout feature *(5 seconds by default)*. Value should be `float` type in seconds and can be configured in local config.
 - Configuration file integrity check implemented. User now will be notified if something wrong with it.
+- `auth login` details *(username, password, connection address)* can now be provided with one command, syntax:
+  ```sh
+  auth login [OPTIONS] [USERNAME] [PASSWORD] [CONNECTION_ADDRESS]
+  ```
 
 ### Tweaked
 > All changes now will be placed here, in **Tweaked**, instead of the **Changed**
