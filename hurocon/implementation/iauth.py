@@ -1,4 +1,4 @@
-from getpass import getpass
+from pwinput import pwinput
 
 from huawei_lte_api.Client import Client
 
@@ -17,7 +17,7 @@ def auth_login_impl(username: str, password: str, connection_address: str):
             .format(LOCAL_CONFIG_DEFAULT['connection']['address'])
         )
         uname = input('• Username: ')
-        passwd = getpass('• Password: ')
+        passwd = pwinput(prompt='• Password: ')
     else:
         con_ip = connection_address if connection_address is not None \
             else LOCAL_CONFIG_DEFAULT['connection']['address']
