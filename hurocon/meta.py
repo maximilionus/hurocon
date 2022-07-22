@@ -1,3 +1,3 @@
 name = 'hurocon'
-version = '0.6.0dev0'
+version = '0.6.0'
 author = 'maximilionus'

@@ -2,7 +2,7 @@
 This project uses [semantic versioning](https://semver.org/). Note that semver rules for this project are only used on public part of it - `cli`. Source code of this project may be changed in any **not backwards compatible** way without `MAJOR` version incrementation.
 
 
-## 0.6.0 : dev
+## 0.6.0 : 2022.07.22
 ### Added
 - Connection timeout feature *(5 seconds by default)*. Value should be `float` type in seconds and can be configured in local config.
 - Configuration file integrity check implemented. User now will be notified if something wrong with it.
